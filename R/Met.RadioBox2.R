@@ -1,0 +1,63 @@
+`Met.RadioBox2` <-
+function(title,question1,question2,question3, question4,
+question5, question6, question7, question8, question9, question10, question11,
+answer1,answer2,answer3, answer4, answer5, answer6, answer7, answer8, answer9,
+answer10, answer11)
+{
+  Require("tcltk")
+  tt <- tktoplevel()
+  tkwm.title(tt,title)
+  rb1 <- tkradiobutton(tt)
+  rb2 <- tkradiobutton(tt)
+  rb3 <- tkradiobutton(tt)
+  rb4 <- tkradiobutton(tt)
+  rb5 <- tkradiobutton(tt)
+  rb6 <- tkradiobutton(tt)
+  rb7 <- tkradiobutton(tt)
+  rb8 <- tkradiobutton(tt)
+  rb9 <- tkradiobutton(tt)
+  rb10 <- tkradiobutton(tt)
+  rb11 <- tkradiobutton(tt)
+  rbValue<-tclVar(answer10)
+  tkconfigure(rb1,variable=rbValue,value=answer1)
+  tkconfigure(rb2,variable=rbValue,value=answer2)
+  tkconfigure(rb3,variable=rbValue,value=answer3)
+  tkconfigure(rb4,variable=rbValue,value=answer4) 
+  tkconfigure(rb5,variable=rbValue,value=answer5)
+  tkconfigure(rb6,variable=rbValue,value=answer6)
+  tkconfigure(rb7,variable=rbValue,value=answer7)
+  tkconfigure(rb8,variable=rbValue,value=answer8)
+  tkconfigure(rb9,variable=rbValue,value=answer9)
+  tkconfigure(rb10,variable=rbValue,value=answer10)
+  tkconfigure(rb11,variable=rbValue,value=answer11)
+  tkgrid(tklabel(tt,text="                                                      "))
+  tkgrid(tklabel(tt,text="Which method would you like to use?"),sticky="w")
+  tkgrid(tklabel(tt,text="                                                      "))
+  tkgrid(tklabel(tt,text=question1),rb1,sticky="e")
+  tkgrid(tklabel(tt,text=question2),rb2,sticky="e")
+  tkgrid(tklabel(tt,text=question3),rb3,sticky="e")
+  tkgrid(tklabel(tt,text=question4),rb4,sticky="e")
+  tkgrid(tklabel(tt,text=question5),rb5,sticky="e")
+  tkgrid(tklabel(tt,text=question6),rb6,sticky="e")
+  tkgrid(tklabel(tt,text=question7),rb7,sticky="e")
+  tkgrid(tklabel(tt,text=question8),rb8,sticky="e")
+  tkgrid(tklabel(tt,text=question9),rb9,sticky="e")
+  tkgrid(tklabel(tt,text=question10),rb10,sticky="e")
+  tkgrid(tklabel(tt,text=question11),rb11,sticky="e")
+ 
+  OnOK <- function()
+  {
+    rbVal <- as.character(tclvalue(rbValue))
+    tkdestroy(tt)
+  }
+  OK.but <- tkbutton(tt,text="OK",command=OnOK)
+  tkgrid(tklabel(tt,text="                                                      "))
+  tkgrid(OK.but)
+  tkgrid(tklabel(tt,text="                                                      "))
+  tkraise(tt)
+  tkfocus(tt)
+  tkwait.window(tt)
+  return(as.character(rbValue))
+
+}
+

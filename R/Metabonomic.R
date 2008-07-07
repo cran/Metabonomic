@@ -118,7 +118,7 @@ stop("  Stop  ")
   font.txt <- tkfont.create(family="times",size=12)
   scr <- tkscrollbar(console, repeatinterval=5,
          command=function(...)tkyview(txt,...))
-  txt <- tktext(console, width=150,height=15,font=font.txt)
+  txt <- tktext(console, width=130,height=15,font=font.txt)
   tkgrid(txt,scr,columnspan=100)
   tkgrid.configure(scr,sticky="ns")
 
@@ -127,8 +127,8 @@ stop("  Stop  ")
          command=function(...)tkyview(txt2,...))
   scr3 <- tkscrollbar(console, repeatinterval=5,
          command=function(...)tkyview(txt3,...))
-  txt2 <- tktext(console,bg="#d8d8d8", width=75,height=15,font=font.txt,fg="blue")
-  txt3 <- tktext(console,bg="#d8d8d8", width=75,height=15,font=font.txt,fg="red")
+  txt2 <- tktext(console,bg="#d8d8d8", width=65,height=15,font=font.txt,fg="blue")
+  txt3 <- tktext(console,bg="#d8d8d8", width=65,height=15,font=font.txt,fg="red")
   tkgrid(tklabel(console,text="  Output  "),columnspan=50)
   tkgrid(tklabel(console,text="  Warning  "),row=3,column=51,columnspan=50)
 

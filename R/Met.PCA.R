@@ -6,7 +6,7 @@ function(datos){
 ######################################Data Load 
   info=datos$info
   datos<-datos$datos
-  attach(datos)
+
   dimnames(datos)[[1]]=as.character(datos[,1])
   datos=datos[,-1] #eliminamos la primera columna
   colnames(datos)=info$nombres

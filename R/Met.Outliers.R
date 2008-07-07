@@ -14,7 +14,6 @@ dat.pc<-prcomp(datos,scale=FALSE,center=TRUE,tol = sqrt(.Machine$double.eps))
 summary(dat.pc,loadings=TRUE)
 Principales<-predict(dat.pc)  #PCA
 Require("robustbase")
-Require("mvoutlier")
 windows()
 tolEllipsePlot(Principales[,1:2], m.cov = covMcd(Principales[,1:2]), 
    cutoff = NULL, id.n = NULL,

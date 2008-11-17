@@ -10,11 +10,10 @@ Met.Load.Data()
 }
 %- maybe also 'usage' for other objects documented here.
 \details{
-  Met.Load.Data is launched with the GUI. 
-  Load a data spectra file where the first column is the chemical shift(in ppm) and the intensities of the
-  different spectra are in the followings columns. The data file has to be written without header. 
-  In addition you have to load a 'info' text file with the information of the different spectra, where the 
-  first column holds the names of each spectrum and the different characteristics are in the followings columns.
+The NMR spectra for the metabonomic analysis are loaded as a text file by selecting the ''file/ Load Data file'' tab. The text file, with no header, has in the first column the chemical shift (in ppm) and the intensities of the different spectra are in the following columns. 
+After finishing importing the spectra text file, the GUI asks for an ''info'' file. This file contains all the information about the different samples, previously written by the user as a text file, where the first column holds the names of the samples and the different characteristics are in the followings columns separated by tabs. 
+A header with the caption of each column is also required.
+
 
 Example of info file:
 
@@ -62,3 +61,4 @@ Example of info file:
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ interface }
+

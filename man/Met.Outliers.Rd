@@ -14,7 +14,7 @@ Met.Outliers(datos)
   
 }
 \details{
-This function makes use of the 'robustbase' package to identify the outliers. It runs in the R console.
+It shows Mahalanobis distances based on robust and classical estimates of the location and the covariance matrix in different plots.This function makes use of the 'robustbase' package and It runs in the R console.
 }
 \value{
   \item{datos }{Spectra data frame}

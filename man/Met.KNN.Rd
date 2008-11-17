@@ -15,7 +15,10 @@ Met.KNN(datos, externa)
   \item{externa}{ Not implemented yet}
 }
 \details{
- Launched with the GUI. Beta version.
+The k-Nearest Neighbors (KNN) rule for classification is the simplest of all supervised classification approaches. For classification of an unknown object, its distance, usually the Euclidian distance, to all other objects is computed. The minimum distance is selected and the object is assigned to the corresponding class. The KNN graphical interface (Metabonomic Analysis / KNN) allows to choose between random or manual selection of the samples to build the model, number of the neighbors, minimum vote for definite decision or the use or not of all the neighbors. 
+If the use of all the neighbors is selected, all distances equal to the kth largest are included. If not, a random selection of distances equal to the kth is chosen to use exactly k neighbors. To finish, it returns the results of the validation test and the cross validation test. The KNN graphical application makes use of the ''knn'' function from the class package  
+
+Launched with the GUI. Beta version.
 
 }
 

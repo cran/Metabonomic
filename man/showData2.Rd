@@ -35,3 +35,4 @@ showData2(dataframe, colname.bgcolor , rowname.bgcolor , body.bgcolor , colname.
 relimp package  \url{http://finzi.psych.upenn.edu/R/library/relimp/html/showData.html}
 }
 \keyword{ interface }
+

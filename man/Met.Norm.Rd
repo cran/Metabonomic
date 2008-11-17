@@ -13,7 +13,9 @@ Met.Norm(datos)
   \item{datos}{  Spectra data frame}
 }
 \details{
-   Launched with the GUI. Beta version.
+A crucial step in data pre-processing of spectra from metabonomic studies is the so-called normalization. The normalization step tries to account for possible variations in sample concentrations. Normalization can also be necessary due to technical reasons. 
+If spectra are recorded using a different number of scans or if spectra are recorded with different devices, the absolute values of the spectra are different and rendering a joint analysis of spectra without prior normalization is impossible. The normalization graphical application (Preprocesing / Normalization) allows choosing between several types of normalizations using functions from the clusterSim library.
+Launched with the GUI. Beta version.
 }
 \references{ clusterSim package  \url{http://finzi.psych.upenn.edu/R/library/clusterSim/html/data.Normalization.html}}
 

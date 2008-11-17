@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Chemical Shift Region Display}
 \description{
-  This function plots the values of a chemical shift position for the different samples.
+  This function shows the differences among the different subgroups in a determinate spectral region. The application plots the values of all samples in a determinate chemical shift region and the mean value of these
 }
 \usage{
 Met.B.STAT(datos)

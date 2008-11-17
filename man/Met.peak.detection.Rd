@@ -14,7 +14,9 @@ Met.peak.detection(datos)
   \item{datos}{ Spectra data frame}
 }
 \details{
- Launched with the GUI. Beta version.
+The alignment of peaks is an alternative to binning the spectrum to account for peak shifts. A peak detection graphical application (Preprocessing / Peak Detection) has been developed to control the ''msc.peaks.find'' function from caMassClass library.
+The graphical application adjusts the signal-to-noise ratio and the threshold criterion in the peak's detection process and it returns a data frame with the positions and intensities of the detected peaks.
+Launched with the GUI. Beta version.
 
 }
 \value{

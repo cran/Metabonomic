@@ -10,10 +10,10 @@ Import.data()
 }
 %- maybe also 'usage' for other objects documented here.
 \details{
-Import.data is launched with the GUI and it will load the processed Bruker spectrum (.../pdata/1/1r).
-The 'procs' file and the acquisition information have to be in the same directory.
+Import.data  has been developed to load directly the spectra in the Bruker commercial format and it will load the processed Bruker spectrum by TOPSPIN software one by one. The Bruker spectrum is saved as ''.../pdata/1/1r''  in the Bruker experiment's folder
+The 'procs' file and the acquisition information have to be in the same directory. This application also allow the spectrum reference by putting the chemical shift of certain compound (TSP or DSS) to be 0ppm. When the first spectrum is loaded, the GUI asks for a new spectrum. 
 After finishing importing the spectra information, select a 'info' text file with the information of the different spectra,
- where the first column holds the names of the spectra and the different characteristics are in the followings columns.
+where the first column holds the names of the spectra and the different characteristics are in the followings columns.
 
 Example of an info file:
 \tabular{rllll}{
@@ -61,4 +61,5 @@ Example of an info file:
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ interface }
+
 

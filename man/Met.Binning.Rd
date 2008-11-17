@@ -15,7 +15,8 @@ Met.Binning(datos)
   \item{datos}{  Spectra data frame }
 }
 \details{
- Launched with the GUI. Beta version.
+The most common method of reducing the influence of shifting peaks is the so-called binning or bucketing method, which reduces the spectrum resolution.  Thereby the spectra are integrated within small spectral regions, called ''bins'' or ''buckets''. Subsequent data analysis procedures, which are applied to the binned spectra, are not influenced by peak shifts, as long as these shifts remain within the borders of the corresponding bins. After launching the Binning graphical applications (Preprocessing / Binning), the user can select the bin size. The spectra integration is performed by running the ''binning'' function from the PROcess library. 
+Launched with the GUI. Beta version.
 
 }
 \references{ caMassClass package  \url{http://finzi.psych.upenn.edu/R/library/caMassClass/html/00Index.html}

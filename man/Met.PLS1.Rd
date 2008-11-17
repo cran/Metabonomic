@@ -17,7 +17,9 @@ Met.PLS1(datos, externa)
 
 }
 \details{
-  Launched with the GUI. Beta version.
+The PLS graphical application (Metabonomic Analysis / Partial Least Squares / PLS) has been developed with a PLS algorithm based on the extension of the generalized partial least squares model proposed by Ding and Gentleman. This algorithm is implemented using the ''gpls'' function from the ''gpls'' package and it allows one to separate only two classes of samples. 
+The graphical application controls the manual or random selection of the samples to build the model, the selection of all the algorithm parameters as the tolerance to the convergence, the number of iterations allowed or the number of PLS components used.  At the end, the results of the validation test will be returned.
+Launched with the GUI. Beta version.
 
 }
 \references{ 

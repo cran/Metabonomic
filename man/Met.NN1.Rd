@@ -15,7 +15,10 @@ Met.NN1(datos, externa)
 
 }
 \details{
-  Launched with the GUI. Beta version.
+Application of artificial neural networks (ANN) for data processing is characterized by analogy with a biological neuron. An ANN consists of a layered network of nodes, each of which performs a simple operation on several inputs to produce a single output. 
+This application (Metabonomic Analysis / Neural Network / Neural Network (Single hidden layer)) makes use of the ''nnet'' function from the ''nnet'' R package. This graphical application allows the user to build a single-hidden-layer neural network, selecting the number of units in the hidden layer, the initial random weight and the weight decay.
+In addition, the user can choose between random or manual selection of the training samples.
+Launched with the GUI. Beta version.
 }
 \references{  nnet package  \url{http://finzi.psych.upenn.edu/R/library/nnet/html/nnet.html}}
 \author{  Jose L. Izquierdo \email{izquierdo@ieb.ucm.es} }
@@ -23,3 +26,4 @@ Met.NN1(datos, externa)
 % R documentation directory.
 
 \keyword{ interface }
+

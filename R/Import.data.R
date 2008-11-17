@@ -26,7 +26,12 @@ b<-paste(b,a[i],sep="/")
         endian = .Platform$endian)
   C.Shift<-cbind(C.Shift,S)
   plot(C.Shift[,1],C.Shift[,2],"l",xlim=c(offset,first.ppm))
-
+  ref.quest<-tkmessageBox(message="Do you want to reference the spectrum?",icon="question",type="yesno",default="yes")
+  if(tclvalue(ref.quest)=="yes")
+  Met.spectrum.2(C.Shift)
+  c.1<-which(C.Shift[,1]<= -3.20)
+  c.2<-which(C.Shift[,1]>= 13.30)
+  Spectra<-C.Shift[-c(c.1,c.2),]
   answer<-tclvalue(tkmessageBox(title="Import Data",message="Import another spectrum?",icon="info",type="yesno"))
 
   while (answer=="yes")
@@ -50,8 +55,15 @@ first.ppm<-offset-sw
 c.shift<-seq(from =offset , to =first.ppm ,length.out = n.points)
 S<-readBin(spectrum, what="int", n = 33000, size = NA_integer_,
  signed = FALSE,endian = .Platform$endian)
-C.Shift<-cbind(C.Shift,S)
-  answer<-tclvalue(tkmessageBox(title="Import Data",message="Import another spectrum?",icon="info",type="yesno"))
+C.Shift<-cbind(c.shift,S)
+  plot(C.Shift[,1],C.Shift[,2],"l",xlim=c(offset,first.ppm))
+  ref.quest<-tkmessageBox(message="Do you want to reference the spectrum?",icon="question",type="yesno",default="yes")
+  if(tclvalue(ref.quest)=="yes")
+  Met.spectrum.2(C.Shift)
+  c.1<-which(C.Shift[,1]<= -3.20)
+  c.2<-which(C.Shift[,1]>= 13.30)
+  Spectra<-cbind(Spectra,C.Shift[-c(c.1,c.2),2])
+answer<-tclvalue(tkmessageBox(title="Import Data",message="Import another spectrum?",icon="info",type="yesno"))
 
   }
   tkmessageBox(title="Import Data",message="Select the info file",icon="info",type="ok")
@@ -64,7 +76,7 @@ C.Shift<-cbind(C.Shift,S)
   
   ii<-order(as.vector(C.Shift[,1]))
   C.Shift<-C.Shift[ii,]
-  datos<<-list(datos=as.data.frame(C.Shift),info=info)
+  datos<<-list(datos=as.data.frame(Spectra),info=info)
   library('relimp')
   showData2(datos$datos,title="Import Data")
   memory.data[[memory]]<<-list(generation=memory,datos=as.data.frame(C.Shift),info=info)

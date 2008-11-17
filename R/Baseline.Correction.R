@@ -135,7 +135,7 @@ tkgrid(tklabel(tt,text="Label    "),canvas2,ChangeColor.button2)
    tkgrid(tklabel(tt,text="    "))
 tkgrid(tklabel(tt,text="Axis    "),canvas3,ChangeColor.button3)
    tkgrid(tklabel(tt,text="    "))
-tkgrid(tklabel(tt,text="Legent    "),canvas4,ChangeColor.button4)
+tkgrid(tklabel(tt,text="Legend    "),canvas4,ChangeColor.button4)
    tkgrid(tklabel(tt,text="    "))
 tkgrid(tklabel(tt,text="Title    "),canvas5,ChangeColor.button5)
    tkgrid(tklabel(tt,text="    "))
@@ -163,7 +163,7 @@ modalDialog4 <- function(title,question,question2,question3,question4, entryInit
   textEntryWidget4 <- tkentry(dlg,width=paste(entryWidth),textvariable=textEntryVarTcl4)
 
   tkgrid(tklabel(dlg,text="       "))
-  tkgrid(tklabel(dlg,text="Change the Legent"),sticky="w")
+  tkgrid(tklabel(dlg,text="Change the Legend"),sticky="w")
    tkgrid(tklabel(dlg,text="       "))
   tkgrid(tklabel(dlg,text=question),textEntryWidget,sticky="e")
   tkgrid(tklabel(dlg,text=question2),textEntryWidget2,sticky="e")
@@ -293,7 +293,7 @@ tkgrid(tklabel(dlg,text="Text Size"),sticky="w")
 tkgrid(tklabel(dlg,text="       "))
 tkgrid(tklabel(dlg,text="Labels : "),SliderValueLabel1,slider1)
 tkgrid(tklabel(dlg,text="Axis : "),SliderValueLabel2,slider2)
-tkgrid(tklabel(dlg,text="Legent : "),SliderValueLabel3,slider3)
+tkgrid(tklabel(dlg,text="Legend : "),SliderValueLabel3,slider3)
 tkgrid(tklabel(dlg,text="Title : "),SliderValueLabel4,slider4)
 tkgrid(tklabel(dlg,text="Subtitle : "),SliderValueLabel5,slider5)
 tkgrid(tklabel(dlg,text="       "))
@@ -374,7 +374,7 @@ q3="Negativity Penalty",q4="Frac. Changed", e1=binsiz,e2=max.it,e3=neg.p, e4=fra
   textWidget4 <- tkentry(dlg,width=paste(entryWidth),textvariable=textVarTcl4)
 
   tkgrid(tklabel(dlg,text="       "))
-  tkgrid(tklabel(dlg,text="Change the Legent"),sticky="w")
+  tkgrid(tklabel(dlg,text="Change the Legend"),sticky="w")
    tkgrid(tklabel(dlg,text="       "))
   tkgrid(tklabel(dlg,text=q1),textWidget,sticky="e")
   tkgrid(tklabel(dlg,text=q2),textWidget2,sticky="e")
@@ -418,12 +418,12 @@ tkdestroy(dlg)
   tkconfigure(tt, menu=Menu)
   tkadd(Menu, "command", label="Background color",
         command=change.color.bakground)
-  legent <- tkmenu(Menu,borderwidth=40,tearoff=FALSE)
-  tkadd(legent, "command", label="Text",
-        command=function() modalDialog4("Legent   ","Xlab   ","Ylab   ","Main Title   ","Subtitle", xlab,ylab,main,subt))
-  tkadd(legent, "command", label="Size",
+  legend <- tkmenu(Menu,borderwidth=40,tearoff=FALSE)
+  tkadd(legend, "command", label="Text",
+        command=function() modalDialog4("Legend   ","Xlab   ","Ylab   ","Main Title   ","Subtitle", xlab,ylab,main,subt))
+  tkadd(legend, "command", label="Size",
         command=function() Text.size())
-  tkadd(Menu, "cascade", label="Legent",menu=legent)
+  tkadd(Menu, "cascade", label="Legend",menu=legend)
   tkadd(Menu, "command", label="Zoom",
         command=function() Zoom())
   tkadd(Menu, "command", label="Extra Parameters",

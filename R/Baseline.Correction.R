@@ -27,11 +27,11 @@ function()
 
 ###### Baseline Parameters
 
-sm<-10^10
+sm<-10^-10
 frac<-0.001
 max.it<-3000
-binsiz<-63
-neg.p<-sqrt(pi/2)
+binsiz<-1
+neg.p<-6
 
 ###### Plot Function
 
@@ -42,12 +42,10 @@ neg.p<-sqrt(pi/2)
 a2<-sp[,i]
 
 ############ Baseline function
-baseline(a2, sm.fac = sm, neg.pen =neg.p, max.iter = max.it,
- frac.changed = frac, binsize = binsiz,xvals =sp[,1])
-
-a3<<-baseline(a2, sm.fac = sm, neg.pen =neg.p, max.iter = max.it,
- frac.changed = frac, binsize = binsiz,xvals =sp[,1])
-
+baseline(a2, sm.par = sm, neg.pen =neg.p, max.iter = max.it,
+ frac.changed = frac, k.biweight = binsiz,xvals =sp[,1])
+a3<<-baseline(a2, sm.par = sm, neg.pen =neg.p, max.iter = max.it,
+ frac.changed = frac, k.biweight = binsiz,xvals =sp[,1])
 
   plot(sp[,1],sp[,i],type="l",xlab=xlab,ylab=ylab,xlim=xlim,main=main,
 sub=subt,cex.axis=size$cex.axis,cex.lab=size$cex.lab,xaxp=c(xlim[1],xlim[2],20),
@@ -357,7 +355,7 @@ tkdestroy(tt)
 }
 ###### Baseline extra parameters
 
- extra.parameters <- function(title="Parameters",q1="Binsize",q2="Max. iterations",
+ extra.parameters <- function(title="Parameters",q1="Robust center and scale estimation ",q2="Max. iterations",
 q3="Negativity Penalty",q4="Frac. Changed", e1=binsiz,e2=max.it,e3=neg.p, e4=frac,entryWidth=20,returnValOnCancel="ID_CANCEL")
   {
   dlg <- tktoplevel()
@@ -392,8 +390,9 @@ ReturnVal <- returnValOnCancel
     max.it<<-as.numeric(tclvalue(textVarTcl2))
     neg.p<<-as.numeric(tclvalue(textVarTcl3))
 frac<<-as.numeric(tclvalue(textVarTcl4))
-    tkdestroy(dlg)
-tkrreplot(img,plotFunction())  
+    
+tkrreplot(img,plotFunction()) 
+tkdestroy(dlg)
    }
   onCancel <- function()
   {
@@ -431,7 +430,7 @@ tkrreplot(img,plotFunction())
         command=function() extra.parameters())
   copy.but <- tkbutton(tt,text="Copy to pdf",command=CopyToClip)
   ok.but <- tkbutton(tt,text="Ok",command=onok)
-  SliderValue1 <- tclVar(10)
+  SliderValue1 <- tclVar(20)
   SliderValueLabel1 <- tklabel(tt,text=as.character(tclvalue(SliderValue1)),background="white")
   tkconfigure(SliderValueLabel1,textvariable=SliderValue1)
 
@@ -439,10 +438,10 @@ tkrreplot(img,plotFunction())
 
   f.intensity<-function()
   {
-  sm<<-10^as.numeric(tclvalue(SliderValue1))
+  sm<<-10^(-0.5*(as.numeric(tclvalue(SliderValue1))))
 tkrreplot(img,plotFunction())
   }
-  slider1 <- tkscale(tt, from=1, to=20,showvalue=F, variable=SliderValue1,
+  slider1 <- tkscale(tt, from=1, to=30,showvalue=F, variable=SliderValue1,
              resolution=1, orient="horizontal",bigincrement=25)
  
   tkbind(slider1,"<ButtonRelease-1>" ,f.intensity)

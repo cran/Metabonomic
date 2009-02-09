@@ -1,7 +1,7 @@
 \name{Import.data}
 \alias{Import.data}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Brucker spactra importation}
+\title{ Bruker spectra}
 \description{
   Import.data loads the Brucker Spectra for the metabonomic analysis.
 }
@@ -10,10 +10,9 @@ Import.data()
 }
 %- maybe also 'usage' for other objects documented here.
 \details{
-Import.data  has been developed to load directly the spectra in the Bruker commercial format and it will load the processed Bruker spectrum by TOPSPIN software one by one. The Bruker spectrum is saved as ''.../pdata/1/1r''  in the Bruker experiment's folder
-The 'procs' file and the acquisition information have to be in the same directory. This application also allow the spectrum reference by putting the chemical shift of certain compound (TSP or DSS) to be 0ppm. When the first spectrum is loaded, the GUI asks for a new spectrum. 
-After finishing importing the spectra information, select a 'info' text file with the information of the different spectra,
+Import.data  has been developed to load directly the spectra in the Bruker spectroscopy format. Import.data can also be executed by selecting the 'file/ Import Bruker file' tab of the Metabonomic GUI. The user has to select the raw data (FID file in the Bruker data directory). This application displays the spectrum reference and manages basic operations such as setting the chemical shift of a certain compound (TSP or DSS) to 0 ppm and zero order and first order phase corrections. When the first set of data is loaded, the GUI asks for a new array. After finishing importing all the spectra, the GUI asks for the ''info'' text file with the information of the different spectra,
 where the first column holds the names of the spectra and the different characteristics are in the followings columns.
+Applications to load other commercial data formats will be added soon.
 
 Example of an info file:
 \tabular{rllll}{

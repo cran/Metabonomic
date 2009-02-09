@@ -311,7 +311,7 @@ tkrreplot(img,plotFunction())
 #espectro$b<<-as.numeric(tclvalue(SliderValue2))+1
 #}
 #tkdestroy(dlg)
-#main<<-paste("Spectrum ",tit[as.numeric(tclvalue(SliderValue1)),1]," (",tit[as.numeric(tclvalue(SliderValue1)),categoria],")")
+#main<<-paste("Spectrum ",tit[as.numeric(tclvalue(SliderValue1)),1])
 #tkrreplot(img,plotFunction())
   
 #   }

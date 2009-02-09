@@ -350,6 +350,10 @@ tkrreplot(img,plotFunction())
 if(i>=(dim(sp)[2]+1))
 {
 datos$datos<<-SP2
+ memory<<-memory+1
+ memory.data[[memory]]<<-list(generation=memory,datos=datos$datos,
+  info=datos$info)     #For undo function
+
 tkdestroy(tt)
 }
 }

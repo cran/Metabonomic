@@ -18,7 +18,7 @@ function(xCoords)
   tipo="l"
   intensity=100
   espectro=list(a=2,b=0)
-  main<-paste("Spectrum ",tit[espectro$a,1]," (",tit[espectro$a,categoria],")")
+  main<-paste("Spectrum ",tit[espectro$a,1])
   indexLabeled<-c()
   labeledPoints <- list()
  
@@ -269,7 +269,7 @@ espectro$a<<-as.numeric(tclvalue(SliderValue1))+1
 espectro$b<<-as.numeric(tclvalue(SliderValue2))+1
 }
 tkdestroy(dlg)
-main<<-paste("Spectrum ",tit[as.numeric(tclvalue(SliderValue1)),1]," (",tit[as.numeric(tclvalue(SliderValue1)),categoria],")")
+main<<-paste("Spectrum ",tit[as.numeric(tclvalue(SliderValue1)),1])
 tkrreplot(img,plotFunction())
   
    }

@@ -120,7 +120,7 @@ Met.FID<-function(){
 
 require(tcltk)#Packages
   require(tkrplot)
-require(waved)
+require(Rwave)
 tt <- tktoplevel(background="white")#Main windows
   tkwm.title(tt,"FID Import Interface")
 
@@ -458,6 +458,7 @@ datos.fid2<-list()
 a<-round(x,3)
 if(a<x)
 a<-a+0.001
+a<-round(a,3)
 return(a)
 }
 round3<-function(x)
@@ -465,6 +466,7 @@ round3<-function(x)
 a<-round(x,3)
 if(a>x)
 a<-a-0.001
+a<-round(a,3)
 return(a)
 }
 

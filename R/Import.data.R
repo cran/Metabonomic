@@ -455,16 +455,16 @@ answer="yes"
 datos.fid2<-list()
  round2<-function(x)
 {
-a<-round(x,2)
+a<-round(x,3)
 if(a<x)
-a<-a+0.01
+a<-a+0.001
 return(a)
 }
 round3<-function(x)
 {
-a<-round(x,2)
+a<-round(x,3)
 if(a>x)
-a<-a-0.01
+a<-a-0.001
 return(a)
 }
 
@@ -490,13 +490,18 @@ for(j in 1:i)
 f1[j]<-lim[1,1]
 f2[j]<-lim[dim(lim)[1],1]
 }
+cm1<-which(f1==max(f1))[1]
+cm2<-as.data.frame(datos.fid2[[cm1]])
+cm2<-cm2[c(which(cm2[,1]==max(f1))[1]:which(round(cm2[,1],3)==round3(min(f2)))[1]),]
+cm3<-dim(cm2)[1]
 f1<<-f1
 f2<<-f2
 for(j in 1:i)
 {
 p<-as.data.frame(datos.fid2[[j]])
-p<-p[c(which(round(p[,1],3)==round2(max(f1)))[1]:which(round(p[,1],3)==round3(min(f2)))[1]),]
+p<-p[c(which(round(p[,1],3)==round2(max(f1)))[1]:(which(round(p[,1],3)==round2(max(f1)))[1]+cm3-100)),]
 datos.fid2[[j]]<-p
+
 }
 datos<-as.data.frame(datos.fid2[[1]])
 if (i>1)

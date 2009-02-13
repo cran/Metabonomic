@@ -337,6 +337,12 @@ windows()
 plotFunction()
 }
 
+Refresh<-function()
+{
+tkrreplot(img,plotFunction())
+}
+
+
 ###### OK Button function
  
 onok <- function()
@@ -434,6 +440,7 @@ tkdestroy(dlg)
         command=function() extra.parameters())
   copy.but <- tkbutton(tt,text="Copy to pdf",command=CopyToClip)
   ok.but <- tkbutton(tt,text="Ok",command=onok)
+  refresh.but <- tkbutton(tt,text="Refresh",command=Refresh)
   SliderValue1 <- tclVar(20)
   SliderValueLabel1 <- tklabel(tt,text=as.character(tclvalue(SliderValue1)),background="white")
   tkconfigure(SliderValueLabel1,textvariable=SliderValue1)
@@ -451,8 +458,10 @@ tkrreplot(img,plotFunction())
   tkbind(slider1,"<ButtonRelease-1>" ,f.intensity)
   tkpack(img,side="top")
 
-  tkpack(tklabel(tt,text="Smoothing Factor : ",background="white"),SliderValueLabel1,slider1)
-  tkpack(ok.but,copy.but,padx=10,side="right",pady=10,ipadx=0)
+  tkpack(tklabel(tt,text="Smoothing Factor : ",background="white"),SliderValueLabel1,slider1,
+tklabel(tt,text="           ",background="white"),
+  ok.but,refresh.but,copy.but,padx=10,side="left",pady=10,ipadx=0)
+
   tkfocus(tt)
   tkraise(tt)
 #  tkconfigure(console,cursor="arrow")

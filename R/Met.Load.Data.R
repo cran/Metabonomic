@@ -7,6 +7,15 @@ function()
   ReturnVal <- tkmessageBox(title="Load Data",message="Select the input file",icon="info",type="ok")
   Require("tcltk")
   fileName<-tclvalue(tkgetOpenFile())
+  a<-unlist(strsplit(fileName,"/"))
+  fin<-length(a)-1
+  b<-paste(a[1],sep="/")
+  for(i in 2:fin)
+  {
+b<-paste(b,a[i],sep="/")
+  }
+setwd(b)
+
   if (!nchar(fileName))
     tkmessageBox(message="No file selected!")
   else
@@ -26,10 +35,12 @@ datos<-datos[,-i]
   else
     tkmessageBox(message=paste("The selected file is",fileName2))
   info=read.table(fileName2,sep="\t",header=TRUE)
-  showData2(datos,title="Load data")
+ # showData2(datos,title="Load data")
   datos<<-list(datos=datos,info=info)
   memory.data[[memory]]<<-list(generation=memory,datos=datos,info=info)
-  tkconfigure(console,cursor="arrow")
+ tclvalue(tkmessageBox(message=" Spectra file loaded",icon="info",type="ok",default="ok"))
+ 
+tkconfigure(console,cursor="arrow")
 
 }
 

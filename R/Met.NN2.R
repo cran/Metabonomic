@@ -1,4 +1,4 @@
-`Met.NN2` <-
+Met.NN2 <-
 function(datos,externa){
   Require("class")
   Require("AMORE")

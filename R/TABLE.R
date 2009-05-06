@@ -1,4 +1,4 @@
-`TABLE` <-
+TABLE <-
 function(a,b,title=""){
   e<-title
   d<-table(a,b)

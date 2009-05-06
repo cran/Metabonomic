@@ -1,4 +1,4 @@
-`Met.Outliers` <-
+Met.Outliers <-
 function(datos){
 tkconfigure(console,cursor="watch")
 ReturnVal <- tkmessageBox(title="Outliers",message="Outliers identification by Mehalanobis distance. Launched in the R console.",icon="info",type="ok")

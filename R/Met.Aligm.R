@@ -1,4 +1,4 @@
-`Met.Aligm` <-
+Met.Aligm <-
 function(datos,Peaks){
   tkconfigure(console,cursor="watch")
   picos<-datos$datos

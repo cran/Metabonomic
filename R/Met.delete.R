@@ -1,4 +1,4 @@
-`Met.delete` <-
+Met.delete <-
 function()
 {
   tkconfigure(console,cursor="watch")

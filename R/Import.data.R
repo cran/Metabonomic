@@ -1,4 +1,4 @@
-`Import.data` <-
+Import.data <-
 function()
 {
 require(tcltk)#Packages

@@ -1,4 +1,4 @@
-`Met.modalDialog2` <-
+Met.modalDialog2 <-
 function(title,question,question2,entryInit,entryInit2,entryWidth=20,returnValOnCancel="ID_CANCEL")
 {
 

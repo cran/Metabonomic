@@ -1,4 +1,4 @@
-`Met.LDA.multi` <-
+Met.LDA.multi <-
 function(datos,externa, graph=TRUE){
 
 

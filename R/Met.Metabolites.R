@@ -1,4 +1,4 @@
-`Met.Metabolites` <-
+Met.Metabolites <-
 function(datos, externa){
   tkconfigure(console,cursor="watch")
   list.spectrum<-function()

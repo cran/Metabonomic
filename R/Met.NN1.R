@@ -1,4 +1,4 @@
-`Met.NN1` <-
+Met.NN1 <-
 function(datos,externa){
   Require("class")
   Require("nnet")

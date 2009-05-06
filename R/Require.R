@@ -1,4 +1,4 @@
-`Require` <-
+Require <-
 function(pkg)
 {
   if (data.class(result<-try(.find.package(pkg),TRUE))=="try-error")

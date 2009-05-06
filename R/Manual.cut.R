@@ -1,4 +1,4 @@
-`Manual.cut` <-
+Manual.cut <-
 function()
 {
     tkconfigure(console, cursor = "watch")

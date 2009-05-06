@@ -1,4 +1,4 @@
-`Met.PCA` <-
+Met.PCA <-
 function(datos){
 
   tkconfigure(console,cursor="watch")

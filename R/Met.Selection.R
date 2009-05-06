@@ -1,4 +1,4 @@
-`Met.Selection` <-
+Met.Selection <-
 function(datos,externa.inicial){
   tkconfigure(console,cursor="watch")
   Met.radio_seleccion1 <- function(etiquetas,s,entryWidth=7,returnValOnCancel="ID_CANCEL")

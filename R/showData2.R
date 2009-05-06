@@ -1,4 +1,4 @@
-`showData2` <-
+showData2 <-
 function (dataframe, colname.bgcolor = "grey50", rowname.bgcolor = "grey50", 
     body.bgcolor = "white", colname.textcolor = "white", rowname.textcolor = "white", 
     body.textcolor = "black", font = "Courier 12", maxheight = 30, 

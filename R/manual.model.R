@@ -1,4 +1,4 @@
-`manual.model` <-
+manual.model <-
 function(title)
 {
   require(tcltk)

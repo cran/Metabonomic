@@ -1,4 +1,4 @@
-`Met.PLS3D` <-
+Met.PLS3D <-
 function(datos,externa,angle){
   Require("splines")
   Require("pls")

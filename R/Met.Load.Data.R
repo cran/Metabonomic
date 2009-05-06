@@ -1,4 +1,4 @@
-`Met.Load.Data` <-
+Met.Load.Data <-
 function()
 {
   Require("relimp")

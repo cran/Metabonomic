@@ -1,4 +1,4 @@
-`Metabonomic` <-
+Metabonomic <-
 function() {
   closeAllConnections()
   Require("tcltk")
@@ -46,7 +46,18 @@ tkconfigure(txt3, state="disabled")
   wfile <<- file
   }
 
+  Met.Help1<-function()
+  {
+ tkmessageBox(title="Information",message="Metabonomic version 3.1.3 (2009-04-14)
+Copyright(C)2009 Instituto de Estudios Biofuncionales (UCM)",icon="info",type="ok")
+  }
 
+  Met.Help2<-function()
+  {
+   .write()
+   print(eval(?Metabonomic))
+   .write()
+  }
   Require("tkrplot")
   load <- function() 
   {
@@ -79,36 +90,29 @@ tkconfigure(console,cursor="arrow")
 stop("  Stop  ")
   }
   console <<- tktoplevel()
-  tclRequire("Img")
-  image1 <- tclVar()  
-  image2 <- tclVar()
-  image3 <- tclVar()
-  image4 <- tclVar()
-  image5 <- tclVar()
-  image6 <- tclVar()
-  image7 <- tclVar()
   
-  ico.undo<- paste(R.base.dir,"/../../library/Metabonomic/51.bmp",sep="")
-  ico.redo<- paste(R.base.dir,"/../../library/Metabonomic/52.bmp",sep="")
-  ico.show<- paste(R.base.dir,"/../../library/Metabonomic/62.bmp",sep="")
-  ico.launch<- paste(R.base.dir,"/../../library/Metabonomic/42.bmp",sep="")
-  ico.exit<-paste(R.base.dir,"/../../library/Metabonomic/493.bmp",sep="")
-  ico.erease<- paste(R.base.dir,"/../../library/Metabonomic/43.bmp",sep="")
-  ico.stop<- paste(R.base.dir,"/../../library/Metabonomic/44.bmp",sep="")
+  ico.undo<- paste(R.base.dir,"/../../library/Metabonomic/51.gif",sep="")
+  ico.redo<- paste(R.base.dir,"/../../library/Metabonomic/52.gif",sep="")
+  ico.show<- paste(R.base.dir,"/../../library/Metabonomic/62.gif",sep="")
+  ico.launch<- paste(R.base.dir,"/../../library/Metabonomic/42.gif",sep="")
+  ico.exit<-paste(R.base.dir,"/../../library/Metabonomic/493.gif",sep="")
+  ico.erease<- paste(R.base.dir,"/../../library/Metabonomic/43.gif",sep="")
+  ico.stop<- paste(R.base.dir,"/../../library/Metabonomic/44.gif",sep="")
 
-  tcl("image","create","photo",image1,file=ico.undo)
-  tcl("image","create","photo",image2,file=ico.redo)
-  tcl("image","create","photo",image3,file=ico.show)
-  tcl("image","create","photo",image5,file=ico.launch)
-  tcl("image","create","photo",image4,file=ico.exit)
-  tcl("image","create","photo",image6,file=ico.erease)
-  tcl("image","create","photo",image7,file=ico.stop)
+
+  image1<-tkimage.create("photo",file=ico.undo,height=50, width=50)
+  image2<-tkimage.create("photo",file=ico.redo,height=50, width=50)
+  image3<-tkimage.create("photo",file=ico.show,height=50, width=50)
+  image4<-tkimage.create("photo",file=ico.launch,height=50, width=50)
+  image5<-tkimage.create("photo",file=ico.exit,height=50, width=50)
+  image6<-tkimage.create("photo",file=ico.erease,height=50, width=50)
+  image7<-tkimage.create("photo",file=ico.stop,height=50, width=50)
 
   Undo.but<-tkbutton(console,image=image1,command=Met.undo)
   Redo.but<-tkbutton(console,image=image2,command=Met.redo)
   Show.but<-tkbutton(console,image=image3,command=Met.Show) 
-  Data.but<-tkbutton(console,image=image4,command=.exit)
-  Launch.but<-tkbutton(console,image=image5,command=run)
+  Data.but<-tkbutton(console,image=image5,command=.exit)
+  Launch.but<-tkbutton(console,image=image4,command=run)
   Erease.but<-tkbutton(console,image=image6,command=function() tkdelete(txt,"0.0","100000.0"))
   Stop.but<-tkbutton(console,image=image7,command=Met.stop)
 
@@ -235,6 +239,12 @@ command=function() Met.spectrum(xCoords=memory.data[[1]]))
 command=function() Met.spectrum(xCoords=datos))
   tkadd(topMenu,"cascade",label="Spectrum",menu=SpectMenu)
 
+  HelpMenu <- tkmenu(topMenu,tearoff=FALSE)
+ tkadd(HelpMenu,"command",label="Help",
+command=function() Met.Help2())
+  tkadd(HelpMenu,"command",label="About",
+command=function() Met.Help1())
+ tkadd(topMenu,"cascade",label="Help",menu=HelpMenu)
   
  
   tkwm.title(console,"Metabonomic")     

@@ -1,4 +1,4 @@
-`Met.model.1` <-
+Met.model.1 <-
 function(title)
 {
   Require("tcltk")

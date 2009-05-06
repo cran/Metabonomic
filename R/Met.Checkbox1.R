@@ -1,4 +1,4 @@
-`Met.Checkbox1` <-
+Met.Checkbox1 <-
 function(title,question1,question2,answer1,answer2,answer3,answer4)
 {
   Require("tcltk")

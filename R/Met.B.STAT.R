@@ -1,4 +1,4 @@
-`Met.B.STAT` <-
+Met.B.STAT <-
 function(datos)
 {
   tkconfigure(console,cursor="watch")

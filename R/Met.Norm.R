@@ -1,4 +1,4 @@
-`Met.Norm` <-
+Met.Norm <-
 function(datos)
 {
   tkconfigure(console,cursor="watch")

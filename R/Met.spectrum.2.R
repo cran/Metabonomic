@@ -1,4 +1,4 @@
-`Met.spectrum.2` <-
+Met.spectrum.2 <-
 function(xCoords)
 {
   tkconfigure(console,cursor="watch")

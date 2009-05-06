@@ -1,4 +1,4 @@
-`Met.LDA` <-
+Met.LDA <-
 function(datos,externa){
   tkconfigure(console,cursor="watch")
 

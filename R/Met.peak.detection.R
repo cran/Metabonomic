@@ -1,4 +1,4 @@
-`Met.peak.detection` <-
+Met.peak.detection <-
 function(datos){
   tkconfigure(console,cursor="watch")
 

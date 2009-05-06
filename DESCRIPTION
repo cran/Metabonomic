@@ -1,8 +1,8 @@
 Package: Metabonomic
 Type: Package
-Title: What the package does (short line)
-Version: 3.1.3
-Date: 2009-04-14
+Title: GUI for Metabonomic Analysis
+Version: 3.1.3.2
+Date: 2009-05-06
 Author: Jose L. Izquierdo <izquierdo@ieb.ucm.es> Instituto de Estudios
         Biofuncionales(U.C.M.).
 Maintainer: Jose L. Izquierdo <izquierdo@ieb.ucm.es>
@@ -14,6 +14,6 @@ License: GPL (>= 2)
 Depends: tcltk, tcltk2, tkrplot, robustbase, PROcess, MASS, gpls, pls,
         splines, class, nnet, AMORE, neural, caMassClass, clusterSim,
         hddplot, scatterplot3d, relimp, Icens, FTICRMS, waved
-Packaged: Thu Apr 16 17:23:32 2009; Jose
+Packaged: 2009-05-06 11:21:18 UTC; Jose
 Repository: CRAN
-Date/Publication: 2009-04-16 15:51:56
+Date/Publication: 2009-05-06 17:14:37

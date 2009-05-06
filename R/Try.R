@@ -1,4 +1,4 @@
-`Try` <-
+Try <-
 function(expr)
 {
   if (data.class(result<-try(expr,TRUE))=="try-error")

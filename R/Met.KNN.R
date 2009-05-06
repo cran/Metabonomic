@@ -1,4 +1,4 @@
-`Met.KNN` <-
+Met.KNN <-
 function(datos,externa){
   Require("class")
   tkconfigure(console,cursor="watch")

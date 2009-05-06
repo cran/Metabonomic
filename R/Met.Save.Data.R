@@ -1,4 +1,4 @@
-`Met.Save.Data` <-
+Met.Save.Data <-
 function()
 {
   fileName<-tclvalue(tkgetSaveFile())

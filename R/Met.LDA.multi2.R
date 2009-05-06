@@ -1,4 +1,4 @@
-`Met.LDA.multi2` <-
+Met.LDA.multi2 <-
 function(datos,externa, graph=TRUE){
 
   info=datos$info

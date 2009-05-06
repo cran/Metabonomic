@@ -1,4 +1,4 @@
-`Met.modalDialog` <-
+Met.modalDialog <-
 function(title,question,entryInit,entryWidth=20,returnValOnCancel="ID_CANCEL")
 {
   dlg <- tktoplevel()

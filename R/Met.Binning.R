@@ -1,4 +1,4 @@
-`Met.Binning` <-
+Met.Binning <-
 function(datos)
 {
   tkconfigure(console,cursor="watch")

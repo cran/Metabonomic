@@ -118,82 +118,42 @@ metodo=as.character(tclvalue(rbValue4)))
    tkwait.window(tt)
 return(ReturnVal)
   }
-
+  ######################
 
   Met.model<- function(title)
-  {
+{
 dlg <- tktoplevel()
   tkwm.deiconify(dlg)
   tkgrab.set(dlg)
   tkfocus(dlg)
   tkwm.title(dlg,title)
-SliderValue1 <- tclVar(round(v1/2))
-SliderValue2 <- tclVar(round(v2/2))
-SliderValueLabel1 <- tklabel(dlg,text=as.character(tclvalue(SliderValue1)))
-SliderValueLabel2 <- tklabel(dlg,text=as.character(tclvalue(SliderValue2)))
-tkconfigure(SliderValueLabel1,textvariable=SliderValue1)
-tkconfigure(SliderValueLabel2,textvariable=SliderValue2)
-
-
-slider1 <- tkscale(dlg, from=(v1-1), to=2,showvalue=F, variable=SliderValue1,
-                   resolution=1, orient="horizontal")
-slider2 <- tkscale(dlg, from=(v2-1), to=2,showvalue=F, variable=SliderValue2,
-                   resolution=1, orient="horizontal")
+SliderValue<-list()
+SliderValueLabel<-list()
+slider<-list()
 tkgrid(tklabel(dlg,text="       "))
 tkgrid(tklabel(dlg,text="Building the model"),sticky="w")
 tkgrid(tklabel(dlg,text="       "))
-
-tkgrid(tklabel(dlg,text=paste("Number of samples of the",clase1,"group : ")),SliderValueLabel1,slider1)
-tkgrid(tklabel(dlg,text=paste("Number of samples of the",clase2,"group : ")),SliderValueLabel2,slider2)
-if (is.character(clase3)==TRUE & is.character(clase4)==FALSE)
+for (i in 1:length(clase))
 {
-SliderValue3 <- tclVar(round(v1b/2))
-SliderValueLabel3 <- tklabel(dlg,text=as.character(tclvalue(SliderValue3)))
-tkconfigure(SliderValueLabel3,textvariable=SliderValue3)
-slider3 <- tkscale(dlg, from=(v1b-1), to=2,showvalue=F, variable=SliderValue3,
+SliderValue[[i]] <- tclVar(round(v[i]/2))
+SliderValueLabel[[i]] <- tklabel(dlg,text=as.character(tclvalue(SliderValue[[i]])))
+tkconfigure(SliderValueLabel[[i]],textvariable=SliderValue[[i]])
+slider[[i]] <- tkscale(dlg, from=(v[i]-1), to=2,showvalue=F, variable=SliderValue[[i]],
                    resolution=1, orient="horizontal")
-tkgrid(tklabel(dlg,text=paste("Number of samples of the",clase3,"group : ")),SliderValueLabel3,slider3)
-}
- if (is.character(clase3)==TRUE & is.character(clase4)==TRUE)
-{
-SliderValue3 <- tclVar(round(v1b/2))
-SliderValueLabel3 <- tklabel(dlg,text=as.character(tclvalue(SliderValue3)))
-tkconfigure(SliderValueLabel3,textvariable=SliderValue3)
-slider3 <- tkscale(dlg, from=(v1b-1), to=2,showvalue=F, variable=SliderValue3,
-                   resolution=1, orient="horizontal")
-
-SliderValue4 <- tclVar(round(v1c/2))
-SliderValueLabel4 <- tklabel(dlg,text=as.character(tclvalue(SliderValue4)))
-tkconfigure(SliderValueLabel4,textvariable=SliderValue4)
-slider4 <- tkscale(dlg, from=(v1c-1), to=2,showvalue=F, variable=SliderValue4,
-                   resolution=1, orient="horizontal")
-tkgrid(tklabel(dlg,text=paste("Number of samples of the",clase3,"group : ")),SliderValueLabel3,slider3)
-tkgrid(tklabel(dlg,text=paste("Number of samples of the",clase4,"group : ")),SliderValueLabel4,slider4)
-
+tkgrid(tklabel(dlg,text=paste("Number of samples of the",clase[[i]],
+"group : ")),SliderValueLabel[[i]],slider[[i]])
 }
 tkgrid(tklabel(dlg,text="       "))
   tkgrid(tklabel(dlg,text="       "))
   
 onOK <- function()
   {
-if (is.character(clase3)==FALSE)
-{
-elementos<<-list(a=as.numeric(tclvalue(SliderValue1)),
-b=as.numeric(tclvalue(SliderValue2)))
-}
-if (is.character(clase3)==TRUE & is.character(clase4)==FALSE)
-{
-elementos<<-list(a=as.numeric(tclvalue(SliderValue1)),
-b=as.numeric(tclvalue(SliderValue2)),d=as.numeric(tclvalue(SliderValue3)))
-}
-if (is.character(clase3)==TRUE & is.character(clase4)==TRUE)
-{
-elementos<<-list(a=as.numeric(tclvalue(SliderValue1)),
-b=as.numeric(tclvalue(SliderValue2)),
-d=as.numeric(tclvalue(SliderValue3)),e=as.numeric(tclvalue(SliderValue3)))
+d4o<-c()
+for (i in 1:length(clase))
+d4o[i]<-tclvalue(SliderValue[[i]])
+    elementos <<- as.numeric(d4o)
 
-}
-    tkdestroy(dlg)
+tkdestroy(dlg)
 }
   onCancel <- function()
   {
@@ -209,105 +169,51 @@ d=as.numeric(tclvalue(SliderValue3)),e=as.numeric(tclvalue(SliderValue3)))
   tkbind(dlg, "<Destroy>", function() {tkgrab.release(dlg);tkfocus(dlg)})
   tkwait.window(dlg)
   }
+  ##############################
 
   dimnames(datos)[[1]]=as.character(datos[,1])
   datos=datos[,-1] #eliminamos la primera columna
   colnames(datos)=info$Nombre
   datos<-t(datos)
   v4<-dim(info)[1]
-  j=k=l=m=0
-  p=q=r=s=c()
-  for(i in 1:v4)
+  Selection<-list()
+  v<-c()  
+  for (i in 1: length(clase))
   {
-if(info[,categoria][i]==clase1)
-{
-j=j+1
-p[j]=i
-}
-if(info[,categoria][i]==clase2)
-{
-k=k+1
-q[k]=i
-}
-if (is.character(clase3)==TRUE & is.character(clase4)==FALSE)
-{
-if(info[,categoria][i]==clase3)
-{
-l=l+1
-r[l]=i
-}
-}
-if (is.character(clase3)==TRUE & is.character(clase4)==TRUE)
-{
-if(info[,categoria][i]==clase3)
-{
-l=l+1
-r[l]=i
-}
-if(info[,categoria][i]==clase4)
-{
-m=m+1
-s[m]=i
-}
-}
+Selection[[i]]<-which(info[,categoria]==clase[[i]])
+  v[i]<-length(Selection[[i]])
   }
-  rownames(info)
-  v1=p[length(p)]-p[1]+1
-  v2=q[length(q)]-q[1]+1
-  if (is.character(clase3)==TRUE & is.character(clase4)==FALSE)
-  {
-v1b=r[length(r)]-r[1]+1
-  }
-  if (is.character(clase3)==TRUE & is.character(clase4)==TRUE)
-  {
-v1b=r[length(r)]-r[1]+1
-v1c=s[length(s)]-s[1]+1
-  }
+  
   Met.model.1("Neural Network")
-
   if (m.model=="random")  #Random Selection
   {
-Met.model("Neural Network") #Select class
-v3 <-elementos$a
-v5 <- elementos$b
-v6<-v1+1
-if (is.character(clase3)==FALSE)
-{
-samp <- c(sample(p[1]:p[length(p)],v3), sample(q[1]:q[length(q)],v5))
-}
-if (is.character(clase3)==TRUE & is.character(clase4)==FALSE)
-{
-v5b<-elementos$d
-samp <- c(sample(p[1]:p[length(p)],v3), sample(q[1]:q[length(q)],v5),
- sample(r[1]:r[length(r)],v5b))
-}
-  if (is.character(clase3)==TRUE & is.character(clase4)==TRUE)
-{
-v5b<-elementos$d
-v5c <-elementos$e
-samp <- c(sample(p[1]:p[length(p)],v3), sample(q[1]:q[length(q)],v5),
- sample(r[1]:r[length(r)],v5b),sample(s[1]:s[length(s)],v5c))
-}
+ Met.model("Neural Network") #Select class
+samp.list<-list()
+for (i in 1:length(v))
+samp.list[[i]]<-sample(Selection[[i]],elementos[i])
+
+d4m<-c()
+  lista1<-c()
+  d4m[1]<-length(samp.list[[1]])
+  samp<-samp.list[[1]]
+  for (i in 2:length(samp.list))
+  {
+d4m[i]<-length(samp.list[[i]])
+  samp[(length(samp)+1):(length(samp)+d4m[i])]<-samp.list[[i]]
+
   }
+  }
+
   if (m.model=="manual")  #Manual Selection
   {
 manual.model("Neural Network")
   }
-
-  clase<-vector()
-  for(i in 1:v4)  #Change to numeric clasification
-  {  
-if (is.character(clase3)==TRUE & is.character(clase4)==TRUE)
-{
-if(info[,categoria][i]==clase4){clase[i]<-3}
-if(info[,categoria][i]==clase3){clase[i]<-2}
-}
-  if (is.character(clase3)==TRUE & is.character(clase4)==FALSE)
-{
-if(info[,categoria][i]==clase3){clase[i]<-2}
-}
-if(info[,categoria][i]==clase2){clase[i]<-1}
-if(info[,categoria][i]==clase1){clase[i]<-0}
+  
+  sample.class<-vector()
+ 
+  for (i in 1: length(clase))
+  {
+sample.class[which(info[,categoria]==clase[[i]])]<-i
   }
   i=1
   decision<-"yes"
@@ -327,69 +233,38 @@ icon="question",type="yesno",default="yes"))
   neurona<-as.numeric(neurona[0:i])
   Met.text.radio() #NN Parameters
   ReturnVal
-  Try(newff(n.neurons=neurona, learning.rate.global=ReturnVal$a,
- momentum.global=ReturnVal$b,error.criterium=ReturnVal$error, Stao=NA,
- hidden.layer=ReturnVal$h.layer,output.layer=ReturnVal$o.layer,
- method=ReturnVal$metodo))
-  net <- newff(n.neurons=neurona, learning.rate.global=ReturnVal$a,
+  Try(net <- newff(n.neurons=neurona, learning.rate.global=ReturnVal$a,
    momentum.global=ReturnVal$b,error.criterium=ReturnVal$error, Stao=NA,
  hidden.layer=ReturnVal$h.layer,output.layer=ReturnVal$o.layer,
- method=ReturnVal$metodo)
+ method=ReturnVal$metodo))
 
   if(ReturnVal$metodo=="ADAPTgdwm")
   {
-Try(ADAPTgdwm.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000))
-net2<-ADAPTgdwm.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000)
+
+Try(net2<-ADAPTgdwm.MLPnet(net,datos[samp,], as.numeric(sample.class[samp]),n.epochs=25000))
   }
   if(ReturnVal$metodo=="ADAPTgd")
   {
-Try(ADAPTgd.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000))
-net2<-ADAPTgd.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000)
+Try(net2<-ADAPTgd.MLPnet(net,datos[samp,], as.numeric(sample.class[samp]),n.epochs=25000))
   }
 
   if(ReturnVal$metodo=="BATCHgd")
   {
-Try(BATCHgd.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000))
-net2<-BATCHgd.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000)
+Try(net2<-BATCHgd.MLPnet(net,datos[samp,], as.numeric(sample.class[samp]),n.epochs=25000))
   }
   else{
-Try(ADAPTgd.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000))
-net2<-ADAPTgd.MLPnet(net,datos[samp,], clase[samp],n.epochs=25000)
+Try(net2<-ADAPTgd.MLPnet(net,datos[samp,], as.numeric(sample.class[samp]),n.epochs=25000))
   }
 
   z<-sim.MLPnet(net2,datos[-samp,])
   Valores2<-round(z)
   Resultado<-c(mode="character")
   v7<-length(Valores2)
-  for(i in 1:v7)
+  for (i in 1: length(clase))
   {
-  if (is.character(clase3)==TRUE & is.character(clase4)==TRUE)
-{
-if(round(Valores2)[i]>=3)
-{
-Resultado[i]<-clase4
-}
-if(round(Valores2)[i]==2)
-{
-Resultado[i]<-clase3
-}
-}
-if (is.character(clase3)==TRUE & is.character(clase4)==FALSE)
-{
-if(round(Valores2)[i]==2)
-{
-Resultado[i]<-clase3
-}
-}
-if(round(Valores2)[i]==1)
-{
-Resultado[i]<-clase2
-}
-if(round(Valores2)[i]<=0)
-{
-Resultado[i]<-clase1
-}
-  }
+Resultado[which(Valores2==i)]<-clase[[i]]
+  }  
+
   print(table(info[,categoria][-samp],Resultado))
   TABLE(info[,categoria][-samp],Resultado,title="Internal validation results.")
  

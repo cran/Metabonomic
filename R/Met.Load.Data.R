@@ -38,7 +38,7 @@ datos<-datos[,-i]
  # showData2(datos,title="Load data")
   datos<<-list(datos=datos,info=info)
   memory.data[[memory]]<<-list(generation=memory,datos=datos,info=info)
- tclvalue(tkmessageBox(message=" Spectra file loaded",icon="info",type="ok",default="ok"))
+  tclvalue(tkmessageBox(message=" Spectra file loaded",icon="info",type="ok",default="ok"))
  
 tkconfigure(console,cursor="arrow")
 

@@ -1,18 +1,19 @@
 Import.data <-
 function()
 {
-require(tcltk)#Packages
+  require(tcltk)#Packages
   require(tkrplot)
-require(waved)
-memory<<-1
-Fid<-function(){
+  require(waved)
+  memory<<-1
+  Fid<-function()
+  {
 k<<-k+1
 require(tcltk)
- file<-tclvalue(tkgetOpenFile())
+file<-tclvalue(tkgetOpenFile())
 a<-unlist(strsplit(file,"/"))
-  fin<-length(a)-1
-  b<-paste(a[1],sep="/")
-  for(i in 2:fin)
+fin<-length(a)-1
+b<-paste(a[1],sep="/")
+for(i in 2:fin)
   {
 b<-paste(b,a[i],sep="/")
   }
@@ -25,7 +26,7 @@ ficha2<-(strsplit(ficha," "))
 ficha2<-unlist(ficha2)
 n1<-which(ficha2=="##$BF1=")+1
 SF<-as.numeric(ficha2[n1])
-  n2<-which(ficha2== "##$SW_h=")+1
+n2<-which(ficha2== "##$SW_h=")+1
  SWHz<-as.numeric(ficha2[n2])
 
 S<-readBin(file, what="int",70000, size = 4, signed = T,
@@ -49,18 +50,17 @@ t<-seq(from=1, to=td/2, length.out=si)
 XScaleHz<-(SWHz*t/(td/2))
 PPM<-XScaleHz/SF
 
-
 TF<-fftshift(fft((raw2))) #Transformada de Fourier
 #plot(fid.out$PPM,Re(TF),"l", xlim=c(fid.out$PPM[length(x$PPM)],0),xlab="PPM", ylab="")
 
 fid.out[[k]]<-list(fidRaw=fidRaw,fid=raw2,SF=SF, SWHz=SWHz,XScaleHZ=XScaleHz,
  PPM=PPM,spectrum=TF,t=t, si=si )
 return(fid.out)
-}
-#Import Bruker FID
-Bruker<-tclvalue(tkmessageBox(message="Import Bruker FID?",icon="question",type="yesno",default="yes"))
-if (Bruker=="yes")
-{
+  }
+  #Import Bruker FID
+  Bruker<-tclvalue(tkmessageBox(message="Import Bruker FID?",icon="question",type="yesno",default="yes"))
+  if (Bruker=="yes")
+  {
 fid.out<<-list()
 k<-0
 answer<-"yes"
@@ -71,10 +71,8 @@ answer<-tclvalue(tkmessageBox(message="Do you want to import another spectrum?",
 }
 file.out<<-fid.out
 tclvalue(tkmessageBox(message="Bruker spectra loaded",icon="question",type="ok",default="ok"))
-}
+  }
 
-Phase.correction()
-
-
+  Phase.correction()
 }
 

@@ -3,8 +3,20 @@ function(datos,externa)
 {
 
   tkconfigure(console,cursor="watch")
+  if (length(clase)>2)
+  {
+ReturnVal <- tkmessageBox(title="PLS",message="Only two class PLS model. Continue?",icon="warning",type="yesno")
+if (tclvalue(ReturnVal)=="no")
+{
+tkconfigure(console,cursor="arrow")
+ stop("Cancel by the user")
+}
+  }
   info=datos$info#Load Data
   datos=datos$datos
+  attach(info)
+  Require("gpls")
+  Require("pls")
 
   Met.model<- function(title)
   {
@@ -13,31 +25,33 @@ dlg <- tktoplevel()
   tkgrab.set(dlg)
   tkfocus(dlg)
   tkwm.title(dlg,title)
-SliderValue1 <- tclVar(round(v1/2))
-SliderValue2 <- tclVar(round(v2/2))
-SliderValueLabel1 <- tklabel(dlg,text=as.character(tclvalue(SliderValue1)))
-SliderValueLabel2 <- tklabel(dlg,text=as.character(tclvalue(SliderValue2)))
-tkconfigure(SliderValueLabel1,textvariable=SliderValue1)
-tkconfigure(SliderValueLabel2,textvariable=SliderValue2)
-
-
-slider1 <- tkscale(dlg, from=(v1-1), to=2,showvalue=F, variable=SliderValue1,
-                   resolution=1, orient="horizontal")
-slider2 <- tkscale(dlg, from=(v2-1), to=2,showvalue=F, variable=SliderValue2,
-                   resolution=1, orient="horizontal")
+SliderValue<-list()
+SliderValueLabel<-list()
+slider<-list()
 tkgrid(tklabel(dlg,text="       "))
 tkgrid(tklabel(dlg,text="Building the model"),sticky="w")
 tkgrid(tklabel(dlg,text="       "))
-
-tkgrid(tklabel(dlg,text="Number of samples of the 'A' group : "),SliderValueLabel1,slider1)
-tkgrid(tklabel(dlg,text="Number of samples of the 'B' group : "),SliderValueLabel2,slider2)
+for (i in 1:length(clase))
+{
+SliderValue[[i]] <- tclVar(round(v[i]/2))
+SliderValueLabel[[i]] <- tklabel(dlg,text=as.character(tclvalue(SliderValue[[i]])))
+tkconfigure(SliderValueLabel[[i]],textvariable=SliderValue[[i]])
+slider[[i]] <- tkscale(dlg, from=(v[i]-1), to=2,showvalue=F, variable=SliderValue[[i]],
+                   resolution=1, orient="horizontal")
+tkgrid(tklabel(dlg,text=paste("Number of samples of the",clase[[i]],
+"group : ")),SliderValueLabel[[i]],slider[[i]])
+}
 tkgrid(tklabel(dlg,text="       "))
   tkgrid(tklabel(dlg,text="       "))
   
 onOK <- function()
   {
-elementos<<-list(a=as.numeric(tclvalue(SliderValue1)),b=as.numeric(tclvalue(SliderValue2)))
-    tkdestroy(dlg)
+d4o<-c()
+for (i in 1:length(clase))
+d4o[i]<-tclvalue(SliderValue[[i]])
+    elementos <<- as.numeric(d4o)
+
+tkdestroy(dlg)
 }
   onCancel <- function()
   {
@@ -52,13 +66,8 @@ elementos<<-list(a=as.numeric(tclvalue(SliderValue1)),b=as.numeric(tclvalue(Slid
   tkfocus(dlg)
   tkbind(dlg, "<Destroy>", function() {tkgrab.release(dlg);tkfocus(dlg)})
   tkwait.window(dlg)
-
-
   }
-  attach(info)
-  Require("MASS")
-  Require("gpls")
-  Require("pls")
+
   dimnames(datos)[[1]]=as.character(datos[,1]) #Data Pretratament
   datos=datos[,-1] 
   colnames(datos)=info$Nombre
@@ -66,45 +75,33 @@ elementos<<-list(a=as.numeric(tclvalue(SliderValue1)),b=as.numeric(tclvalue(Slid
   dat4=data.frame(enfermedad=as.vector(info[,categoria]))
   dat4$espectros=(datos)
   v4<-dim(info)[1]
-  v1=0
-  v2=0
-  if(info[,categoria][1]==clase2)#Samples Clasification
-  {     
-for(i in 1:v4)
-{
-if(info[,categoria][i]==clase2)
-{
-v1=v1+1
-}
-if(info[,categoria][i]==clase1)
-{
-v2=v2+1
-}
-}
-  }
-  if(info[,categoria][1]==clase1)
+  Selection<-list()
+  v<-c()  
+  for (i in 1: length(clase))
   {
-for(i in 1:v4)
-  {
-if(info[,categoria][i]==clase2)
-{
-v2=v2+1
-}
-if(info[,categoria][i]==clase1)
-{
-v1=v1+1
-}
-}
+Selection[[i]]<-which(info[,categoria]==clase[[i]])
+  v[i]<-length(Selection[[i]])
   }
+
   Met.model.1("PLS")
   if (m.model=="random")  #Random Selection
   {
-Met.model("PLS")  #Number of samples to build the model
-v3 <-elementos$a
-v5 <- elementos$b
-v6<-v1+1
-samp <- c(sample(1:v1,v3), sample(v6:v4,v5)) #Random selection
+ Met.model("Neural Network") #Select class
+samp.list<-list()
+for (i in 1:length(v))
+samp.list[[i]]<-sample(Selection[[i]],elementos[i])
+
+d4m<-c()
+  lista1<-c()
+  d4m[1]<-length(samp.list[[1]])
+  samp<-samp.list[[1]]
+  for (i in 2:length(samp.list))
+  {
+d4m[i]<-length(samp.list[[i]])
+  samp[(d4m[i-1]+1):(d4m[i-1]+d4m[i])]<-samp.list[[i]]
   }
+  }
+
   if (m.model=="manual")  #Manual Selection
   {
  manual.model("PLS")

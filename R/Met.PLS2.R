@@ -1703,9 +1703,13 @@ Resultado[which(Resultados==i)]<-clase[[i]]
 Validacion.Interna<-Resultado
 print(table(info[,categoria][-samp],Validacion.Interna))
 TABLE(info[,categoria][-samp],Validacion.Interna,title="Internal validation results.")
-
+  pls.model<-analisis.pls
   tkconfigure(console,cursor="arrow")
-
-
+  ReturnVal <- tkmessageBox(title="PLS",message="Save PLS model for a later validation?",icon="question",type="yesno")
+  if (tclvalue(ReturnVal)=="yes")
+  {
+fileName<-tclvalue(tkgetSaveFile())
+save(pls.model, file=fileName)
+  }
 }
 

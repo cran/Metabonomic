@@ -124,16 +124,7 @@ rangeY <- usrCoords[4] - usrCoords[3]
   xPlotCoord <<- usrCoords[1]+(xClick-xMin)*rangeX/(xMax-xMin)
   yPlotCoord <- usrCoords[3]+(yClick-yMin)*rangeY/(yMax-yMin)
 
-#a<<-xPlotCoord
-
-  #msg <- paste("Label the point closest to these approximate plot coordinates: \n",
-      #         "x =",format(xPlotCoord,digits=3),",   y =",format(yPlotCoord,digits=3))
-  #mbval<- tkmessageBox(title="Label Point Closest to These Approximate Plot Coordinates",
-      #                 message=msg,type="ok",icon="info")
-
-  #if (tclvalue(mbval)=="yes")
-  #  labelClosestPoint(xClick,yClick,imgXcoords,imgYcoords)
-      Met.reference()
+Met.reference()
   }
 
   tkbind(img, "<Button-1>",OnLeftClick)
@@ -273,62 +264,6 @@ tkrreplot(img,plotFunction())
   tkwait.window(dlg)
   return(ReturnVal)
   }
-
-#  change.espectrum<-function()
-#  {
-#dlg <- tktoplevel()
-#  tkwm.deiconify(dlg)
-#  tkgrab.set(dlg)
-# tkfocus(dlg)
-#  tkwm.title(dlg,"Spectrum")
-#SliderValue1 <- tclVar("1")
-#SliderValueLabel1 <- tklabel(dlg,text=as.character(tclvalue(SliderValue1)))
-#tkconfigure(SliderValueLabel1,textvariable=SliderValue1)
-#slider1 <- tkscale(dlg, from=1, to=dim(xCoords)[2]-1,showvalue=F, variable=SliderValue1,
-#                  resolution=1, orient="horizontal")
-#tkgrid(tklabel(dlg,text="       "))
-#tkgrid(tklabel(dlg,text="Spectrum selection:"),sticky="w")
-#tkgrid(tklabel(dlg,text="       "))
-#tkgrid(tklabel(dlg,text="Spectrum : "),SliderValueLabel1,slider1)
-#if(espectro$b!=0)
-#{
-#SliderValue2 <- tclVar("2")
-#SliderValueLabel2 <- tklabel(dlg,text=as.character(tclvalue(SliderValue2)))
-#  tkconfigure(SliderValueLabel2,textvariable=SliderValue2)
-#  slider2 <- tkscale(dlg, from=1, to=dim(xCoords)[2]-1,showvalue=F, variable=SliderValue2,
-#             resolution=1, orient="horizontal")
-# tkgrid(tklabel(dlg,text="       "))
-#  tkgrid(tklabel(dlg,text="Spectrum 2: "),SliderValueLabel2,slider2)
-#}
-#tkgrid(tklabel(dlg,text="       "))
-# tkgrid(tklabel(dlg,text="       "))
-  
-#onOK <- function()
-#  {
-#espectro$a<<-as.numeric(tclvalue(SliderValue1))+1
-#    if(espectro$b!=0)
-#{
-#espectro$b<<-as.numeric(tclvalue(SliderValue2))+1
-#}
-#tkdestroy(dlg)
-#main<<-paste("Spectrum ",tit[as.numeric(tclvalue(SliderValue1)),1])
-#tkrreplot(img,plotFunction())
-  
-#   }
-#  onCancel <- function()
-#  {
-#    ReturnVal <<- 0
-#    tkdestroy(dlg)
-#   }
-#  OK.but     <-tkbutton(dlg,text="   OK   ",command=onOK)
-#  Cancel.but <-tkbutton(dlg,text=" Cancel ",command=onCancel)
-#  tkgrid(OK.but,Cancel.but)
-#  tkgrid(tklabel(dlg,text="    "))
-#  tkraise(dlg)
-#  tkfocus(dlg)
-#  tkbind(dlg, "<Destroy>", function() {tkgrab.release(dlg);tkfocus(dlg)})
-#  tkwait.window(dlg)
-#  }
 
   Zoom<-function()
   {

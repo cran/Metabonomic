@@ -6,9 +6,9 @@ function(datos){
   picos3<-as.matrix(picos)
   rownames(picos3)<-picos[,1]
   picos3<-picos3[,-1]
-  Require("caMassClass")
+  Require("")
   Met.model<- function()
-{
+  {
 dlg <- tktoplevel()
   tkwm.deiconify(dlg)
   tkgrab.set(dlg)
@@ -41,10 +41,10 @@ peak.parameters<<-list(a=as.numeric(tclvalue(SliderValue1)),b=as.numeric(tclvalu
     tkdestroy(dlg)
 }
   onCancel <- function()
-  {
+{
     ReturnVal <<- 0
     tkdestroy(dlg)
-   }
+}
   OK.but     <-tkbutton(dlg,text="   OK   ",command=onOK)
   Cancel.but <-tkbutton(dlg,text=" Cancel ",command=onCancel)
   tkgrid(tklabel(dlg,text="    "),OK.but,Cancel.but)
@@ -66,7 +66,6 @@ SNR=peak.parameters$a,span=c(31,3), zerothresh = peak.parameters$b)
   colnames(Peaks2)[5]<-"Chemical Shift"
   showData2(Peaks2,title="Peaks detected")
   tkconfigure(console,cursor="arrow")
-
 
 }
 

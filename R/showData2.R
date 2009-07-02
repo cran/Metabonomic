@@ -5,15 +5,7 @@ function (dataframe, colname.bgcolor = "grey50", rowname.bgcolor = "grey50",
     maxwidth = 80, title = NULL, rowname.bar = "left", colname.bar = "top", 
     rownumbers = FALSE, placement = "-20-40", suppress.X11.warnings = TRUE) 
 {
-    #if (suppress.X11.warnings) {
-     #   messages.connection <- textConnection(".messages", open = "w", 
-      #      local = TRUE)
- 
-       # on.exit({
-        #    sink(type = "message")
-         #   close(messages.connection)
-        #})
-    #}
+
     object.name <- deparse(substitute(dataframe))
     if (!is.data.frame(dataframe)) {
         temp <- try(dataframe <- as.data.frame(dataframe), silent = FALSE)
@@ -38,13 +30,13 @@ function (dataframe, colname.bgcolor = "grey50", rowname.bgcolor = "grey50",
         stop("data frame too wide")
     options(width = oldwidth)
     base <- tktoplevel()
-    tkwm.geometry(base, placement)
+    #tkwm.geometry(base, placement)
     tkwm.title(base, {
         if (is.null(title)) 
             object.name
         else title
     })
-    nrows <- length(zz) - 1
+    nrows <- length(zz) 
     if (is.numeric(rownumbers)) 
         rowname.text <- paste(rownumbers, row.names(dataframe))
     else if (rownumbers) 
@@ -229,7 +221,7 @@ function (dataframe, colname.bgcolor = "grey50", rowname.bgcolor = "grey50",
     if ("right" %in% rowname.bar) {
         tkinsert(rnames, "end", paste(rowname.text, collapse = "\n"), 
             "notwrapped")
-        tkgrid(rnames, row = 1, column = 2, sticky = "ns")
+        tkgrid(rnames, row = 2, column = 2, sticky = "ns")
     }
     tkconfigure(txt, state = "disabled")
     tkconfigure(lnames, state = "disabled")
@@ -244,6 +236,18 @@ function (dataframe, colname.bgcolor = "grey50", rowname.bgcolor = "grey50",
     tkgrid.columnconfigure(base, 1, weight = 1)
     tkwm.maxsize(base, 1 + datawidth, nrows)
     tkwm.minsize(base, 1 + nchar(names(dataframe)[1]), 1)
+    Save.Data<-function()
+    {
+  fileName<-tclvalue(tkgetSaveFile())
+  write.table(dataframe, file = fileName, append = FALSE, quote = FALSE, sep = "\t",
+    eol = "\n", na = "NA", dec = ".", row.names = FALSE,
+    col.names = FALSE, qmethod = c("escape", "double")) 
+} 
+    Menu <- tkmenu(base,borderwidth=40)
+    tkconfigure(base, menu=Menu)
+tkadd(Menu, "command", label="Save data",
+      command=function()Save.Data())
+
     invisible(NULL)
 }
 

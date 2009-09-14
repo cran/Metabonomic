@@ -6,7 +6,7 @@ function(datos){
   picos3<-as.matrix(picos)
   rownames(picos3)<-picos[,1]
   picos3<-picos3[,-1]
-  Require("")
+  #Require("")
   Met.model<- function()
   {
 dlg <- tktoplevel()

@@ -6,7 +6,7 @@ function(datos,Peaks)
   picos3<-as.matrix(picos)
   rownames(picos3)<-picos[,1]
   picos3<-picos3[,-1]
-  Require("caMassClass")
+  #Require("caMassClass")
   Try(msc.peaks.align(Peaks, SampFrac=0.1, BinSize=c(0, 0.01)))
   biomarcadores<-msc.peaks.align(Peaks, SampFrac=0.1, BinSize=c(0, 0.01))
   picos6<-msc.biomarkers.fill( picos3, biomarcadores$Bmrks, biomarcadores$BinBounds, FillType=2)

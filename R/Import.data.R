@@ -8,7 +8,7 @@ function()
   Fid<-function()
   {
 k<<-k+1
-require(tcltk)
+
 file<-tclvalue(tkgetOpenFile())
 a<-unlist(strsplit(file,"/"))
 fin<-length(a)-1
@@ -18,25 +18,41 @@ for(i in 2:fin)
 b<-paste(b,a[i],sep="/")
   }
 setwd(b)
-  characteristic<-paste(b,"acqu",sep="/") #Load the information
+  characteristic<-paste(b,"acqus",sep="/") #Load the information
   ficha<-readLines(con = characteristic, n = -1, ok = TRUE, warn = TRUE,
           encoding = "Latin-1")
-is(ficha)
-ficha2<-(strsplit(ficha," "))
+#is(ficha)
+ficha2<-(strsplit(ficha,"="))
 ficha2<-unlist(ficha2)
-n1<-which(ficha2=="##$BF1=")+1
+n1<-which(ficha2=="##$BF1")+1
 SF<-as.numeric(ficha2[n1])
-n2<-which(ficha2== "##$SW_h=")+1
+n2<-which(ficha2== "##$SW_h")+1
  SWHz<-as.numeric(ficha2[n2])
+n3<-which(ficha2=="##$AQ_mod")+1
+Dig<-as.numeric(ficha2[n3])
+n4<-which(ficha2=="##$BYTORDA")+1
+bytorda<-as.numeric(ficha2[n4])
+if (bytorda==1)
+S<-readBin(file, what="int",70000, size = 4, signed = T,endian ="big")
+if (bytorda==0)
+S<-readBin(file, what="int",70000, size = 4, signed = T,endian ="little")
 
-S<-readBin(file, what="int",70000, size = 4, signed = T,
-        endian ="swap")
+
+#plot(S)
 td<-length(S)
-si=2*td
 rawR<-S[seq(from=1, to=td,by=2)]
-fidRaw<-rawR
 rawI<-S[seq(from=2, to=td,by=2)]
-#plot(c(1:(td/2)),Re(rawR),"l")
+if (Dig==3)
+{
+
+module<-sqrt(rawR^2+rawI^2)
+beg<-which(module==max(module))
+rawR<-rawR[-c(1:(beg-1))]
+rawI<-rawI[-c(1:(beg-1))]
+td<-(td-2*(beg-1))
+}
+si=2*td
+fidRaw<-rawR
 mediar<-mean(as.integer(rawR[c((3*length(rawR)/4):length(rawR))]),na.rm = TRUE)
 mediai<--mean(as.integer(rawI[c((3*length(rawR)/4):length(rawR))]),na.rm = TRUE)
 rawR<-rawR-mediar

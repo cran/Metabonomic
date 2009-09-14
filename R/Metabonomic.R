@@ -1,14 +1,33 @@
 Metabonomic <-
 function() {
+R.base.dir <- system.file()
+lib.loc<-.libPaths()
+A.kopls<-.find.package("kopls", lib.loc, quiet = TRUE, 
+                verbose = verbose)
+A.PROcess<-.find.package("PROcess", lib.loc, quiet = TRUE, 
+                verbose = verbose)
+if (length(A.kopls)==0)
+{
+file<- paste(R.base.dir,"/../../library/Metabonomic/kopls_1.0.3.zip",sep="")
+install.packages(file,.libPaths()[1L],repos=NULL)
+#install.packages(choose.files(file, filters = Filters[c("zip", 
+        #"All"), ]), .libPaths()[1L], repos = NULL)
+
+}
+if (length(A.PROcess)==0)
+{
+file2<- paste(R.base.dir,"/../../library/Metabonomic/PROcess_1.8.0.zip",sep="")
+install.packages(file2,.libPaths()[1L],repos=NULL)
+}
   closeAllConnections()
-  Require("tcltk")
-  Require ("tkrplot")
+  require("tcltk")
+  #require ("tkrplot")
   memory.data<<-list()
   
   wfile <- ""
-  R.base.dir <- system.file()
-   Met.Console<- paste(R.base.dir,"/../../library/Metabonomic/Metabonomic_Console_O",sep="")
-   Met.Console2<-paste(R.base.dir,"/../../library/Metabonomic/Metabonomic_Console_W",sep="")
+  
+   Met.Console<- paste("C:/Metabonomic_Console_O",sep="")
+   Met.Console2<-paste("C:/Metabonomic_Console_W",sep="")
  
   .exit<-function()
   {
@@ -58,7 +77,6 @@ Copyright(C)2009 Instituto de Estudios Biofuncionales (UCM)",icon="info",type="o
    print(eval(?Metabonomic))
    .write()
   }
-  Require("tkrplot")
   load <- function() 
   {
   file <- tclvalue(tkgetOpenFile())
@@ -187,6 +205,8 @@ command=function() Met.Selection(datos,externa))
       menu=EditMenu)    
 
   Pretratamiento <- tkmenu(topMenu,tearoff=FALSE)
+  tkadd(Pretratamiento,"command",label="Baseline (FTICRMS)",
+    command=function() Baseline.Correction()) 
   tkadd(Pretratamiento,"command",label="Peak Detection",
     command=function() Met.peak.detection(datos))
   tkadd(Pretratamiento,"command",label="Peak Aligment. Biomarkers",
@@ -195,14 +215,13 @@ command=function() Met.Selection(datos,externa))
     command=function() Met.Binning(datos))
   tkadd(Pretratamiento,"command",label="Normalization",
     command=function() Met.Norm(datos))
-  tkadd(Pretratamiento,"command",label="Baseline (FTICRMS)",
-    command=function() Baseline.Correction())
+
   tkadd(Pretratamiento,"command",label="Metabolites order by discriminantion quality",
     command=function() Met.Order(datos))
   tkadd(Pretratamiento,"command",label="Metabolites Selection",
     command=function()Met.Metabolites(datos, externa))
-  tkadd(Pretratamiento,"command",label="Outliers",
-command=function() Met.Outliers(datos))
+#  tkadd(Pretratamiento,"command",label="Outliers",
+#command=function() Met.Outliers(datos))
   tkadd(topMenu,"cascade",label="Preprocessing",menu=Pretratamiento) 
 
   Analisis <- tkmenu(topMenu,tearoff=FALSE)
@@ -217,6 +236,9 @@ command=function() Met.LDA(datos,externa))
 command=function() Met.PLS1(datos,externa))
   tkadd(PLSMenu,"command",label="PLS with graphics",
 command=function() Met.PLS2(datos,externa))
+  tkadd(PLSMenu,"command",label="Kernel-based Orthogonal PLS",
+command=function() Met.kopls(datos))
+
   #tkadd(PLSMenu,"command",label="PLS with 3D graphics ",
   #command=function() Met.PLS3D(datos,externa))
   tkadd(Analisis,"cascade",label="Partial Least Squares",menu=PLSMenu)

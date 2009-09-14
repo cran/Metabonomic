@@ -1173,7 +1173,7 @@ tkpack(ok.but,side="right",padx="120")
 tkpack(copy.but,side="left",padx="120")
 tkfocus(tt)
 tkraise(tt)
-tkwait.window(tt)
+#tkwait.window(tt)
    }
   ############# 3D PLOT
 
@@ -1625,7 +1625,7 @@ sample.class[which(info[,categoria]==clase[[i]])]<-i
   
   Try(analisis.pls<-plsr(enfermedad ~ espectros,data = dat4,method=ReturnVal$b, scale=escala, validation =ReturnVal$d,subset=samp))
   scores.pls<-plsr(enfermedad ~ espectros,data = dat4, scale=TRUE, validation ="CV",subset=samp)$scores
-  rownames(scores.pls)<-info[,categoria][samp]
+  rownames(scores.pls)<-info[,1][samp]
   g.R2<-R2(analisis.pls, estimate="train",newdata=dat4$espectros[-samp,], ncomp = 1:analisis.pls$ncomp,
    intercept = FALSE, se = FALSE)
   g.MSEP.CV<-MSEP(analisis.pls, estimate="CV", ncomp = 1:analisis.pls$ncomp,
@@ -1640,32 +1640,53 @@ sample.class[which(info[,categoria]==clase[[i]])]<-i
    intercept = FALSE, se = FALSE)
   g.RMSEP.Test<-RMSEP(analisis.pls, estimate="test",newdata=as.data.frame(dat4[-samp,]), ncomp = 1:analisis.pls$ncomp,
    intercept = FALSE, se = FALSE)
+   sum.var<-c()
 
-  sum.var<-c()
   for (i in 1:analisis.pls$ncomp)
 sum.var[i]<-sum(explvar(analisis.pls)[1:i])
-  Model.validation<-list(g.R2,sum.var,g.MSEP.CV,g.MSEP.BYAS,g.MSEP.BYAS,g.MSEP.Test,
+  a<-predict(analisis.pls, dat4$espectros[-samp,],type="response")
+  b<-(a[,,]-dat4$enfermedad[-samp])^2
+  PRESS<-c()
+  for (i in 1:dim(b)[2]) 
+PRESS[i]<-sum(b[,i])
+  CROSS<-as.vector(analisis.pls$validation$PRESS)
+  Model.information<-cbind(g.R2$val[,,],sum.var,as.vector(analisis.pls$validation$PRESS),PRESS,g.MSEP.CV$val[,,],g.MSEP.BYAS$val[,,], g.MSEP.Test$val[,,],g.RMSEP.CV$val[,,],
+g.RMSEP.CV.BYAS$val[,,], g.RMSEP.Test$val[,,])
+  colnames(Model.information)<-c("R2","Variance","CROSS","PRESS","MSEP Cross Validation",
+"MSEP Byas CV","MSEP Test Validation",
+"RMSEP Cross Validation","RMSEP Byas CV",
+"RMSEP Test-Validation")
+ 
+  Model.validation<-list(g.R2,sum.var,as.vector(analisis.pls$validation$PRESS),PRESS,g.MSEP.CV,g.MSEP.BYAS,g.MSEP.BYAS,g.MSEP.Test,
 g.RMSEP.CV,g.RMSEP.CV.BYAS,g.RMSEP.Test)
-  f1(a=Model.validation,ylab=c("R2","Variance (%)","Mean Squared Error of Prediction (MSEP)",
+  f1(a=Model.validation,ylab=c("R2","Variance (%)","CROSS","PRESS","Mean Squared Error of Prediction (MSEP)",
 "Mean Squared Error of Prediction (MSEP)","Mean Squared Error of Prediction (MSEP)",
 "Root Mean Squared Error of Prediction (RMSEP)","Root Mean Squared Error of Prediction (RMSEP)",
-"Root Mean Squared Error of Prediction (MSEP)"), main=c("","Cumulative","Cross-Validation",
+"Root Mean Squared Error of Prediction (MSEP)"), main=c("","Cumulative","","","Cross-Validation",
 "Bias-corrected Cross-Validation","Test-Validation","Cross-Validation","Bias-corrected Cross-Validation",
 "Test-Validation"))
+  f2b(analisis.pls,type=c(1))
+  showData2(Model.information,title="Model Information")
+  showData2(scores.pls[,],title="Scores")
+  showData2(analisis.pls$loadings[,], title="Loadings")
+  
   ncomp<-Met.modalDialog("PLS","Number of PLS Components :   ","",entryWidth=4)
 
-  analisis.pls<-plsr(enfermedad ~ espectros,ncomp,data = dat4,method=ReturnVal$b, scale=escala, validation =ReturnVal$d,subset=samp)
+  Try(analisis.pls<-plsr(enfermedad ~ espectros,ncomp,data = dat4,method=ReturnVal$b, scale=escala, validation =ReturnVal$d,subset=samp))
   scores.pls<-plsr(enfermedad ~ espectros,ncomp,data = dat4, scale=TRUE, validation ="CV",subset=samp)$scores
-  rownames(scores.pls)<-info[,categoria][samp]
+  rownames(scores.pls)<-info[,1][samp]
   f2(a=scores.pls,Validation=F)
   f2b(analisis.pls,type=c(1))
   if (ncomp>2)
 f3(a=scores.pls,Validation=F)
+  showData2(scores.pls[,],title=paste("Scores. PLS Components=",ncomp))
+  showData2(analisis.pls$loadings[,], title=paste("Loadings. PLS Components=",ncomp))
+  
   validacion.pls<-predict(analisis.pls, dat4$espectros[-samp,], type="scores")
   Valores.pls<-predict(analisis.pls, dat4$espectros[-samp,], type="response")
   rownames(validacion.pls)<-info[,categoria][-samp]
   rownames(Valores.pls)<-info[,categoria][-samp]
-  
+  validacion.pls
 
 
 a<-analisis.pls$validation$pred[,1,]
@@ -1703,6 +1724,10 @@ Resultado[which(Resultados==i)]<-clase[[i]]
 Validacion.Interna<-Resultado
 print(table(info[,categoria][-samp],Validacion.Interna))
 TABLE(info[,categoria][-samp],Validacion.Interna,title="Internal validation results.")
+  error<-rbind(CROSS[ncomp],PRESS[ncomp])
+  rownames(error)<-c("CROSS","PRESS")
+  colnames(error)<-"Error"
+  showData2(error, title="Error")
   pls.model<-analisis.pls
   tkconfigure(console,cursor="arrow")
   ReturnVal <- tkmessageBox(title="PLS",message="Save PLS model for a later validation?",icon="question",type="yesno")

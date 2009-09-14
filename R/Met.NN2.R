@@ -2,7 +2,7 @@ Met.NN2 <-
 function(datos,externa){
   Require("class")
   Require("AMORE")
-  Require("neural")
+  #Require("neural")
   tkconfigure(console,cursor="watch")
 
   info=datos$info

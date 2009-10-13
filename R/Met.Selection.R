@@ -155,6 +155,7 @@ tkconfigure(console,cursor="arrow")
   Selection<-list()  
   for (i in 1: length(categoria3))
 Selection[[i]]<-which(select==categoria3[i])
+  
   d4m<-c()
   lista1<-c()
   d4m[1]<-length(Selection[[1]])
@@ -162,7 +163,7 @@ Selection[[i]]<-which(select==categoria3[i])
   for (i in 2:length(Selection))
   {
 d4m[i]<-length(Selection[[i]])
-  lista1[(d4m[i-1]+1):(d4m[i-1]+d4m[i])]<-Selection[[i]]
+  lista1[(length(lista1)+1):(length(lista1)+d4m[i])]<-Selection[[i]]
   }
 
    lista2<-c(1,lista1+1)

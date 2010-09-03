@@ -31,6 +31,6 @@ cbVal2 <- as.character(tclvalue(cbValue2))
   tkraise(tt)
   tkfocus(tt)
   tkwait.window(tt)
-  return(as.character(cbValue),as.character(cbValue2))
+  return(c(as.character(cbValue),as.character(cbValue2)))
 }
 

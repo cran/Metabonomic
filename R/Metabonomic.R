@@ -67,7 +67,7 @@ tkconfigure(txt3, state="disabled")
 
   Met.Help1<-function()
   {
- tkmessageBox(title="Information",message="Metabonomic version 3.1.3 (2009-04-14)
+ tkmessageBox(title="Information",message="Metabonomic version 3.3.2 (2010-09-03)
 Copyright(C)2009 Instituto de Estudios Biofuncionales (UCM)",icon="info",type="ok")
   }
 

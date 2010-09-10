@@ -18,11 +18,19 @@ function(datos,externa)
  tkgrid(tklabel(tt,text="    "))
   tkgrid(tklabel(tt,text="      Selection of the PLS parameters:",font=fontHeading))
  tkgrid(tklabel(tt,text="    "))
- cb <- tkcheckbutton(tt)
- cbValue <-tclVar(1)
- tkconfigure(cb,variable=cbValue)
- tkgrid(tklabel(tt,text="Scale"),cb,sticky="w")
- tkgrid(tklabel(tt,text="    "))
+ ra1 <- tkradiobutton(tt)
+ ra2 <- tkradiobutton(tt)
+ ra3 <- tkradiobutton(tt)
+raValue<-tclVar(1)
+tkconfigure(ra1,variable=raValue,value=0)
+ tkconfigure(ra2,variable=raValue,value=1)
+ tkconfigure(ra3,variable=raValue,value=2)
+ tkgrid(tklabel(tt,text="Scale"),sticky="w")
+ tkgrid(tklabel(tt,text="None"),ra1,sticky="e")
+ tkgrid(tklabel(tt,text="Autoscale"),ra2,sticky="e")
+ tkgrid(tklabel(tt,text="Pareto"),ra3,sticky="e")
+
+tkgrid(tklabel(tt,text="    "))
  rb1 <- tkradiobutton(tt)
  rb2 <- tkradiobutton(tt)
  rb3 <- tkradiobutton(tt)
@@ -54,7 +62,7 @@ function(datos,externa)
  
  onOK <- function()
  {
- ReturnVal <<- list(a=as.numeric(tclvalue(cbValue)),b=as.character(tclvalue(rbValue)),d=as.character(tclvalue(rbValue2)))
+ ReturnVal <<- list(a=as.numeric(tclvalue(raValue)),b=as.character(tclvalue(rbValue)),d=as.character(tclvalue(rbValue2)))
  tkgrab.release(tt)
     tkdestroy(tt)
   }
@@ -1620,9 +1628,24 @@ sample.class[which(info[,categoria]==clase[[i]])]<-i
   dat4=data.frame(enfermedad=sample.class)
   dat4$espectros=(datos)
   Met.check.radio()  #Parameters
-  escala=FALSE
+  if (ReturnVal$a==0)escala=FALSE
   if (ReturnVal$a==1)escala=TRUE
-  
+  if (ReturnVal$a==2)
+  {
+escala=FALSE  
+  metmed<-c()
+  metsd<-c()
+ datos2<-as.data.frame(matrix(ncol=dim(datos)[2],nrow=dim(datos)[1]))
+  for (i in 1:dim(datos)[2])
+  {
+metmed[i]<-mean(datos[,i]) 
+metsd[i]<-sd(datos[,i])
+      datos[,i]<-(datos[,i]-metmed[i])/sqrt(metsd[i])
+dat4$espectros=(datos)
+  }
+  }
+
+
   Try(analisis.pls<-plsr(enfermedad ~ espectros,data = dat4,method=ReturnVal$b, scale=escala, validation =ReturnVal$d,subset=samp))
   scores.pls<-plsr(enfermedad ~ espectros,data = dat4, scale=TRUE, validation ="CV",subset=samp)$scores
   rownames(scores.pls)<-info[,1][samp]

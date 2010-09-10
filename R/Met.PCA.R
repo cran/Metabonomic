@@ -854,6 +854,50 @@ tkfocus(tt)
 tkraise(tt)
 #tkwait.window(tt)
 }
+ 
+ Met.Checkbox1b<-function()
+{
+  Require("tcltk")
+  tt <- tktoplevel()
+  tkgrab.set(tt)
+  tkwm.title(tt,"PCA")
+  rb1 <- tkradiobutton(tt)
+  rb2 <- tkradiobutton(tt)
+  rb3 <- tkradiobutton(tt)
+  cb2 <-tkcheckbutton(tt)
+  rbValue<-tclVar(0)
+  tkconfigure(rb1,variable=rbValue,value=0)
+  tkconfigure(rb2,variable=rbValue,value=1)
+  tkconfigure(rb3,variable=rbValue,value=2)
+  cbValue2 <-tclVar("1")
+  tkconfigure(cb2,variable=cbValue2)
+  tkgrid(tklabel(tt,text="                                                      "))
+  tkgrid(tklabel(tt,text="Selection of the PCA parameters:"),sticky="w")
+  tkgrid(tklabel(tt,text="                                                      "))
+  tkgrid(tklabel(tt,text="Scale: "),sticky="w")
+  tkgrid(tklabel(tt,text="None"),rb1,sticky="e")
+  tkgrid(tklabel(tt,text="Autoscaling"),rb2,sticky="e")
+  tkgrid(tklabel(tt,text="Pareto"),rb3,sticky="e")
+  tkgrid(tklabel(tt,text="                                                      "))
+
+  tkgrid(tklabel(tt,text="Center"),cb2,sticky="w")
+  tkgrid(tklabel(tt,text="                                                      "))
+  OnOK <- function()
+  {
+tkgrab.release(tt)
+rbVal <-tclvalue(rbValue)
+cbVal2 <- as.character(tclvalue(cbValue2)) 
+    tkdestroy(tt)
+  }
+
+  OK.but <- tkbutton(tt,text="OK",command=OnOK)
+  tkgrid(OK.but)
+  tkgrid(tklabel(tt,text="                                                      "))
+  tkraise(tt)
+  tkfocus(tt)
+  tkwait.window(tt)
+  return(c(as.numeric(tclvalue(rbValue)),as.numeric(tclvalue(cbValue2))))
+  }
 
   ######################################PCA Analysis
   info=datos$info
@@ -863,17 +907,32 @@ tkraise(tt)
   colnames(datos)=info$nombres
   datos<-t(datos)
 
-  valor<-((Met.Checkbox1("PCA","Scale","Center",
-"Scale = True","Scale = False","Center = True","Center = False"))) #Selection of Parameters
-  escalado<-tclvalue(valor[1])
-  if (escalado == "1") 
+  valor<-Met.Checkbox1b()
+
+    if (valor[1] == 0) 
+  {
+escalado=FALSE
+  }
+      if (valor[1] == 1) 
   {
 escalado=TRUE
   }
-  else 
+      if (valor[1] == 2) 
+  {
 escalado=FALSE
-  centro<-tclvalue(valor[2])
-  if (centro == "1") 
+  metmed<-c()
+  metsd<-c()
+ datos2<-as.data.frame(matrix(ncol=dim(datos)[2],nrow=dim(datos)[1]))
+  for (i in 1:dim(datos)[2])
+  {
+metmed[i]<-mean(datos[,i]) 
+metsd[i]<-sd(datos[,i])
+      datos[,i]<-(datos[,i]-metmed[i])/sqrt(metsd[i])
+  }
+#datos<-datos2
+  }
+
+  if (valor[2] == 1) 
   centro=TRUE
   else 
 centro=FALSE

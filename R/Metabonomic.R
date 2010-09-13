@@ -1,14 +1,14 @@
 Metabonomic <-
 function() {
 R.base.dir <- system.file()
-lib.loc<-.libPaths()
+lib.loc<-.libPaths()[1L]
 A.kopls<-.find.package("kopls", lib.loc, quiet = TRUE, 
                 verbose = verbose)
 A.PROcess<-.find.package("PROcess", lib.loc, quiet = TRUE, 
                 verbose = verbose)
 if (length(A.kopls)==0)
 {
-file<- paste(R.base.dir,"/../../library/Metabonomic/kopls_1.0.3.zip",sep="")
+file<- paste(lib.loc,"/Metabonomic/kopls_1.0.3.zip",sep="")
 install.packages(file,.libPaths()[1L],repos=NULL)
 #install.packages(choose.files(file, filters = Filters[c("zip", 
         #"All"), ]), .libPaths()[1L], repos = NULL)
@@ -16,7 +16,7 @@ install.packages(file,.libPaths()[1L],repos=NULL)
 }
 if (length(A.PROcess)==0)
 {
-file2<- paste(R.base.dir,"/../../library/Metabonomic/PROcess_1.8.0.zip",sep="")
+file2<- paste(lib.loc,"/MetaMetabonomic_Console_Obonomic/PROcess_1.8.0.zip",sep="")
 install.packages(file2,.libPaths()[1L],repos=NULL)
 }
   closeAllConnections()
@@ -26,8 +26,8 @@ install.packages(file2,.libPaths()[1L],repos=NULL)
   
   wfile <- ""
   
-   Met.Console<- paste("C:/Metabonomic_Console_O",sep="")
-   Met.Console2<-paste("C:/Metabonomic_Console_W",sep="")
+   Met.Console<- paste(lib.loc,"/Metabonomic/Metabonomic_Console_O",sep="")
+   Met.Console2<-paste(lib.loc,"/Metabonomic/Metabonomic_Console_W",sep="")
  
   .exit<-function()
   {
@@ -106,16 +106,21 @@ Copyright(C)2009 Instituto de Estudios Biofuncionales (UCM)",icon="info",type="o
   {
 tkconfigure(console,cursor="arrow")
 stop("  Stop  ")
+  }  
+  .exit<-function()
+  {
+closeAllConnections()
+tkdestroy(console)
   }
   console <<- tktoplevel()
   
-  ico.undo<- paste(R.base.dir,"/../../library/Metabonomic/51.gif",sep="")
-  ico.redo<- paste(R.base.dir,"/../../library/Metabonomic/52.gif",sep="")
-  ico.show<- paste(R.base.dir,"/../../library/Metabonomic/62.gif",sep="")
-  ico.launch<- paste(R.base.dir,"/../../library/Metabonomic/42.gif",sep="")
-  ico.exit<-paste(R.base.dir,"/../../library/Metabonomic/493.gif",sep="")
-  ico.erease<- paste(R.base.dir,"/../../library/Metabonomic/43.gif",sep="")
-  ico.stop<- paste(R.base.dir,"/../../library/Metabonomic/44.gif",sep="")
+  ico.undo<- paste(lib.loc,"/Metabonomic/51.gif",sep="")
+  ico.redo<- paste(lib.loc,"/Metabonomic/52.GIF",sep="")
+  ico.show<- paste(lib.loc,"/Metabonomic/62.GIF",sep="")
+  ico.launch<- paste(lib.loc,"/Metabonomic/42.GIF",sep="")
+  ico.exit<-paste(lib.loc,"/Metabonomic/493.GIF",sep="")
+  ico.erease<- paste(lib.loc,"/Metabonomic/43.GIF",sep="")
+  ico.stop<- paste(lib.loc,"/Metabonomic/44.GIF",sep="")
 
 
   image1<-tkimage.create("photo",file=ico.undo,height=50, width=50)

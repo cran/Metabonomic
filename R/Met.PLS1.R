@@ -15,8 +15,8 @@ tkconfigure(console,cursor="arrow")
   info=datos$info#Load Data
   datos=datos$datos
   attach(info)
-  Require("gpls")
-  Require("pls")
+  require(gpls)
+  require(pls)
 
   Met.model<- function(title)
   {

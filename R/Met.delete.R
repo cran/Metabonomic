@@ -100,7 +100,7 @@ tkconfigure(img,cursor="crosshair")
 
 
 change.color.bakground<-function(){
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 
@@ -495,7 +495,7 @@ tkraise(tt)
   list.spectrum<-function()
   {
 
-Require("tcltk")
+require(tcltk)
 tt<-tktoplevel()
 scr <- tkscrollbar(tt, repeatinterval=5,
    command=function(...)tkyview(tl,...))

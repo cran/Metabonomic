@@ -3,9 +3,10 @@ function(datos,externa)
 {
   tkconfigure(console,cursor="watch")
   
-  Require("splines")
-  Require("pls")
-  Require("scatterplot3d")
+  require(splines)
+  require(pls)
+  require(scatterplot3d)
+  require(tkrplot)
   Met.check.radio <- function(entryWidth=20,returnValOnCancel="ID_CANCEL")
   {
   tt <- tktoplevel()
@@ -158,7 +159,7 @@ img <- tkrplot(tt,plotFunction(),hscale=1.5,vscale=1.5)
 
 change.color.bakground<-function()
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 
@@ -476,7 +477,7 @@ img <- tkrplot(tt,plotFunction(),hscale=1.5,vscale=1.5)
 
 change.color.bakground<-function()
 {
-Require("tcltk")
+require(tcltk)
 tt <- tktoplevel()
 tkwm.title(tt,"Color Selection")
   ChangeColor1 <- function()
@@ -818,7 +819,7 @@ img <- tkrplot(tt,plotFunction(),hscale=1.5,vscale=1.5)
 
 change.color.bakground<-function()
 {
-Require("tcltk")
+require(tcltk)
 tt <- tktoplevel()
 tkwm.title(tt,"Color Selection")
   ChangeColor1 <- function()
@@ -1215,7 +1216,7 @@ img <- tkrplot(tt,plotFunction(color,color2,etiqueta,xlab,ylab,main,subt),hscale
 
 change.color.bakground<-function()
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 

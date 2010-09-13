@@ -1,7 +1,7 @@
 Met.NN2 <-
 function(datos,externa){
-  Require("class")
-  Require("AMORE")
+  require(class)
+  require(AMORE)
   #Require("neural")
   tkconfigure(console,cursor="watch")
 
@@ -222,7 +222,7 @@ sample.class[which(info[,categoria]==clase[[i]])]<-i
   while (decision!="no")
   {
 i=i+1
-Require("tcltk")
+require(tcltk)
  neurona[i] <- Met.modalDialog("Neural Network",
 paste("Number of units in the layer",i-1),"")
 decision<-tclvalue(tkmessageBox(message="Add another layer?",

@@ -1,11 +1,11 @@
 Met.Load.Data <-
 function()
 {
-  Require("relimp")
+  require(relimp)
   #Load data file
   memory<<-1
   ReturnVal <- tkmessageBox(title="Load Data",message="Select the input file",icon="info",type="ok")
-  Require("tcltk")
+  require(tcltk)
   fileName<-tclvalue(tkgetOpenFile())
   a<-unlist(strsplit(fileName,"/"))
   fin<-length(a)-1

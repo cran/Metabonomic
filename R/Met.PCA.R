@@ -3,7 +3,8 @@ function(datos)
 {
 
   tkconfigure(console,cursor="watch")
-  Require("robustbase")
+  require(robustbase)
+  require(tkrplot)
   ############################### Score Plot
   
   f2<-function(a,etiqueta=info[,1],color="white",color2="black",col=list(axis="red",lab="blue",main="black",sub="black"),
@@ -30,7 +31,7 @@ img <- tkrplot(tt,plotFunction(color,color2,etiqueta,xlab,ylab,main,subt),hscale
 
 change.color.bakground<-function()
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 
@@ -327,7 +328,7 @@ img <- tkrplot(tt,plotFunction(color,color2,etiqueta,xlab,ylab,main,subt),hscale
 
 change.color.bakground<-function()
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 
@@ -857,7 +858,7 @@ tkraise(tt)
  
  Met.Checkbox1b<-function()
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkgrab.set(tt)
   tkwm.title(tt,"PCA")

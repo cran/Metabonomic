@@ -94,7 +94,7 @@ img <- tkrplot(tt,plotFunction(color,color2,etiqueta,xlab,ylab,main,subt),hscale
 
 change.color.bakground<-function()
 {
-Require("tcltk")
+require(tcltk)
 tt <- tktoplevel()
 tkwm.title(tt,"Color Selection")
   ChangeColor1 <- function()
@@ -419,7 +419,7 @@ tkwait.window(tt)
 color="white",color2="black",color3="blue",col=list(axis="black",lab="black",main="black",sub="black"),
 subt="",size=list(cex=0.7,cex.axis=1,cex.lab=1,cex.main=1,cex.sub=1),  angle=60, PLSC=list(a=1,b=2,d=3))
    {
-Require("scatterplot3d")
+require(scatterplot3d)
 tt <- tktoplevel()
 plotFunction <<- function(color,color2,etiqueta,xlab,ylab,main,subt)
 {
@@ -443,7 +443,7 @@ text(s3d$xyz.convert(b[,PLSC$a],b[,PLSC$b],b[,PLSC$d]),labels=etiqueta$b,cex=siz
 img <- tkrplot(tt,plotFunction(color,color2,etiqueta,xlab,ylab,main,subt),hscale=1.5,vscale=1.5)
 
 change.color.bakground<-function(){
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 

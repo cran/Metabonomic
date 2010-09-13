@@ -4,7 +4,7 @@ question5, question6, question7, question8, question9, question10, question11,
 answer1,answer2,answer3, answer4, answer5, answer6, answer7, answer8, answer9,
 answer10, answer11)
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,title)
   rb1 <- tkradiobutton(tt)

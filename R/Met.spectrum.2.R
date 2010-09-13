@@ -133,7 +133,7 @@ Met.reference()
 
   change.color.bakground<-function()
   {
-   Require("tcltk")
+   require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 

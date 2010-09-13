@@ -126,7 +126,7 @@ lines(sp[,1],a3$baseline,type="l",col="red")
 
     change.color.bakground<-function()
   {
-   Require("tcltk")
+   require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 

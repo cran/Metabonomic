@@ -1,7 +1,7 @@
 Met.model.1 <-
 function(title)
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkgrab.set(tt)
   tkwm.title(tt,title)

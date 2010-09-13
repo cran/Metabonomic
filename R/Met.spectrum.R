@@ -100,7 +100,7 @@ rangeY <- usrCoords[4] - usrCoords[3]
 
   change.color.bakground<-function()
   {
-   Require("tcltk")
+   require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 

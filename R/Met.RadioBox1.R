@@ -1,7 +1,7 @@
 Met.RadioBox1 <-
 function(title,question1,question2, question4, answer1,answer2, answer4)
 {
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,title)
   rb1 <- tkradiobutton(tt)

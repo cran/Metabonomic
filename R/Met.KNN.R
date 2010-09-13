@@ -1,6 +1,6 @@
 Met.KNN <-
 function(datos,externa){
-  Require("class")
+  require(class)
   tkconfigure(console,cursor="watch")
 
   info=datos$info#Load Data

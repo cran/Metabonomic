@@ -39,7 +39,7 @@ abline(h = mean(x), v = NULL, reg = NULL,coef = NULL,col=color3)
 img <- tkrplot(tt,plotFunction(color,color2,etiqueta,xlab,ylab,main,subt),hscale=1.5,vscale=1.5)
 
 change.color.bakground<-function(){
-  Require("tcltk")
+  require(tcltk)
   tt <- tktoplevel()
   tkwm.title(tt,"Color Selection")
 

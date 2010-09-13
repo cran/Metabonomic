@@ -1,7 +1,7 @@
 Met.NN1 <-
 function(datos,externa){
-  Require("class")
-  Require("nnet")
+  require(class)
+  require(nnet)
   info=datos$info
   datos=datos$datos
   attach(info)

@@ -4,7 +4,7 @@ function(datos)
   tkconfigure(console,cursor="watch")
   
 
-  Require("hddplot")
+  require("hddplot")
   Try(orderFeatures(datos$datos[,-1],cl=datos$info[,categoria],FUN=aovFbyrow))
   orden=orderFeatures(datos$datos[,-1],cl=datos$info[,categoria],FUN=aovFbyrow)
  

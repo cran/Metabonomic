@@ -2,7 +2,7 @@ Met.Norm <-
 function(datos)
 {
   tkconfigure(console,cursor="watch")
-  Require("clusterSim")
+  require("clusterSim")
   c.s<-datos$datos[,1]
   x<-as.data.frame(datos$datos[,-1])
   x<-as.matrix(x)
